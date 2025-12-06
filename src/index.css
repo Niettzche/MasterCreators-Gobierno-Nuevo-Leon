@@ -1,69 +1,32 @@
 @import "tailwindcss";
-@config "../tailwind.config.js";
 
-@layer utilities {
-    .glass-panel {
-        @apply bg-white/80 backdrop-blur-md border border-gray-200 shadow-xl;
-    }
-    .input-field {
-        @apply w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-text-main placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300;
-    }
-    .btn-primary {
-        @apply bg-primary text-secondary font-semibold py-3 px-6 rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/40 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2;
-    }
-    .btn-outline {
-        @apply border border-secondary text-secondary font-medium py-3 px-6 rounded-lg hover:bg-secondary hover:text-white transition-all duration-300;
-    }
-    /* Custom Range Slider Styling */
-    input[type=range] {
-        @apply w-full h-2 rounded-lg appearance-none cursor-pointer;
-        background: linear-gradient(to right, theme('colors.secondary') 0%, theme('colors.primary') 100%);
-        background-size: 100% 100%;
-        border: 1px solid theme('colors.gray.200');
-    }
-    input[type=range]::-webkit-slider-runnable-track {
-        @apply rounded-lg;
-        background: inherit;
-    }
-    input[type=range]::-moz-range-track {
-        @apply rounded-lg;
-        background: inherit;
-    }
-    input[type=range]::-webkit-slider-thumb {
-        @apply appearance-none w-6 h-6 rounded-full bg-primary border-2 border-white shadow-lg cursor-pointer transition-all duration-300 hover:scale-110;
-    }
-    input[type=range]::-webkit-slider-thumb:active {
-        @apply scale-125 shadow-primary/50;
-    }
-    input[type=range]::-moz-range-thumb {
-        @apply appearance-none w-6 h-6 rounded-full bg-primary border-2 border-white shadow-lg cursor-pointer transition-all duration-300 hover:scale-110;
-    }
-    input[type=range]::-moz-range-thumb:active {
-        @apply scale-125 shadow-primary/50;
-    }
-    /* Hide scrollbar for clean aesthetic */
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
-    .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+@theme {
+  --color-primary: #FF6B00; /* Vibrant Orange */
+  --color-secondary: #0F172A; /* Dark Slate */
+  --color-text-main: #1E293B; /* Dark Blue-Grey for main text */
+  --color-text-body: #334155; /* Slightly lighter dark blue-grey for body text */
+  --color-background-alternate: #F8FAFC; /* Light Grey for alternate backgrounds */
+  
+  /* Define the gradient-brand as a custom property if needed, 
+     or use inline styles/postcss for complex backgrounds */
 }
 
-/* Animations */
-@keyframes slide-bg {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
-.fade-in {
-    animation: fadeIn 0.4s ease-in-out;
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light gray track */
+  border-radius: 10px;
 }
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* Slate-300 for thumb */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* Slate-400 on hover */
 }

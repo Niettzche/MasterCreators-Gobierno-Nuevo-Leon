@@ -12,7 +12,7 @@ function InitialAnimation({ onComplete }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white overflow-hidden"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background-alternate overflow-hidden"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
@@ -108,7 +108,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowAnimation(false);
-    }, 3500); // Slightly longer for the maximalist effect
+    }, 3500);
     return () => clearTimeout(timer);
   }, []);
 
