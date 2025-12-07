@@ -10,9 +10,9 @@ Este documento lista las tareas de interfaz de usuario (UI) pendientes de implem
     -   [x]  Crear pantalla de inicio de sesión (`LoginView.jsx`).
     -   [x]  Integrar validación de credenciales (mock por ahora).
     -   [ ]  Enlace a "Olvidé mi Contraseña".
--   [ ]  **Dashboard Layout General:**
-    -   [ ]  Diseñar estructura de layout con navegación lateral adaptable (`DashboardLayout.jsx`).
-    -   [ ]  Implementar navegación dinámica según el rol del usuario.
+-   [x]  **Dashboard Layout General:**
+    -   [x]  Diseñar estructura de layout con navegación lateral adaptable (`DashboardLayout.jsx`).
+    -   [x]  Implementar navegación dinámica según el rol del usuario.
 -   [ ]  **Dashboard del Clúster ("Mis Trámites"):**
     -   [ ]  Crear vista principal para usuarios de tipo Clúster.
     -   [ ]  Listado de "Mis Proyectos" (tabla con Nombre, Convocatoria, Estado, Fecha).
