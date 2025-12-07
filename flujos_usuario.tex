@@ -1,0 +1,174 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{helvet}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+% Colores Institucionales
+\definecolor{navyblue}{RGB}{0, 51, 102}
+\definecolor{accentorange}{RGB}{255, 107, 0}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+
+% Configuración de encabezado
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textcolor{gray}{Documento de Diseño de Experiencia (UX)}}
+\lhead{\textcolor{navyblue}{\textbf{Flujos de Usuario -- Ventanilla Digital NL}}}
+\rfoot{Página \thepage}
+
+\begin{document}
+
+% PORTADA
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge \textbf{\textcolor{navyblue}{Mapeo de Flujos de Usuario (User Journeys)}}}\\[1cm]
+    {\Large \textbf{Plataforma Integral de Clústeres}}\\[0.5cm]
+    {\large Directorio + Ventanilla Digital de Apoyos}\\[2cm]
+    
+    \textbf{Versión del Documento:}\
+    1.0 (Basado en Requerimientos Fase 1 MVP)\\[3cm]
+    
+    \textbf{Objetivo:}\
+    Definir la interacción paso a paso de los distintos actores dentro del sistema para garantizar la trazabilidad y usabilidad del proceso de asignación de recursos.\\[3cm]
+    
+    \vfill
+    \begin{flushright}
+        \small 
+        \textbf{Roles Principales involucrados:}\
+        Clúster Solicitante | Gobierno (Admin) | Comité | Finanzas
+    \end{flushright}
+\end{titlepage}
+
+% CONTENIDO
+\section{Visión General de la Interacción}
+El sistema se comporta como un **Gestor de Flujos de Trabajo (Workflow Engine)**. La interacción no es lineal, sino basada en estados. A continuación, se desglosan los 4 flujos críticos que componen la experiencia completa de la plataforma.
+
+\section{Flujo 1: Onboarding y Perfilamiento (Clúster)}
+\textit{Objetivo: Que un Clúster tenga una identidad digital verificada antes de solicitar dinero.}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Registro Inicial:} 
+    El usuario (Representante del Clúster) accede a la landing page pública y selecciona "Registro de Clúster". Ingresa credenciales básicas (Correo, Contraseña) y recibe un email de verificación.
+    
+    \item \textbf{Configuración del Perfil (Primer Acceso):}
+    Al iniciar sesión por primera vez, el sistema bloquea la navegación y fuerza al usuario a la vista de "Completar Perfil".
+    \begin{itemize}
+        \item \textbf{Carga de Datos:} Llena formularios de Datos Generales, Órganos de Gobierno y Comités.
+        \item \textbf{Expediente Legal Base:} Sube PDFs obligatorios (Acta Constitutiva, Poder Legal, RFC).
+    \end{itemize}
+    
+    \item \textbf{Validación (Backend/Gobierno):}
+    El perfil queda en estado \textit{"En Revisión"}. Un administrador de Gobierno valida que el Clúster exista legalmente.
+    
+    \item \textbf{Activación:}
+    Una vez validado, el Clúster recibe acceso al módulo de "Ventanilla Digital" y su información pública aparece en el "Directorio de Clústeres".
+\end{enumerate}
+
+\section{Flujo 2: La Solicitud de Apoyo (El "Wizard")}
+\textit{Objetivo: Guiar al Clúster en la estructuración de un proyecto viable sin errores financieros.}
+
+Este es el flujo principal de la UI \texttt{RegisterView/Wizard}.
+
+\begin{enumerate}[label=\textbf{Paso \arabic*:}, leftmargin=2cm]
+    \item \textbf{Selección de Convocatoria:} 
+    Desde su Dashboard, el usuario ve tarjetas de "Convocatorias Abiertas". Da clic en "Aplicar".
+    
+    \item \textbf{Pre-llenado Automático:} 
+    El sistema clona los datos del Perfil (Razón Social, RFC, Representante) en la solicitud. El usuario no los escribe, solo los confirma.
+    
+    \item \textbf{Definición del Proyecto:} 
+    El usuario ingresa Título, Resumen, Fechas y selecciona el Rubro (Capacitación, Eventos, etc.).
+    
+    \item \textbf{Matriz Presupuestal (Punto Crítico):}
+    \begin{itemize}
+        \item El usuario agrega partidas una por una (Concepto + Costo).
+        \item \textbf{Feedback en Tiempo Real:} El sistema muestra una barra de progreso de "Aportación Privada". Si es menor al 15\%, el botón "Siguiente" se deshabilita y muestra una alerta en rojo.
+    \end{itemize}
+    
+    \item \textbf{Compromiso de Indicadores:}
+    Define metas numéricas (ej. "20 Empresas Beneficiadas").
+    
+    \item \textbf{Firma y Envío:}
+    Carga documentos específicos del proyecto (Cotizaciones). Al dar clic en "Enviar", la solicitud se bloquea para edición y cambia a estado \texttt{ENVIADA}.
+\end{enumerate}
+
+\section{Flujo 3: Evaluación y Dictamen (Gobierno)}
+\textit{Objetivo: Validar técnica y administrativamente la solicitud.}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Filtro Administrativo (Dirección Clústeres):}
+    El funcionario ve una "Bandeja de Entrada". Abre un expediente y ve la vista de "Validación Documental".
+    \begin{itemize}
+        \item \textit{Caso A (Todo bien):} Marca cada documento como "Válido". El estado cambia a \texttt{VALIDADA}.
+        \item \textit{Caso B (Error):} Escribe un comentario en el documento erróneo (ej. "RFC ilegible") y solicita corrección. El estado regresa a \texttt{REQUIERE ACLARACIÓN}.
+    \end{itemize}
+    
+    \item \textbf{Evaluación Técnica (Comité):}
+    Los evaluadores acceden (modo lectura) a las solicitudes \texttt{VALIDADAS}.
+    \begin{itemize}
+        \item Asignan puntaje (0-100) según la rúbrica.
+        \item Emiten voto: "Aprobado" o "Rechazado".
+    \end{itemize}
+    
+    \item \textbf{Dictamen Final:}
+    Si es aprobado, el sistema genera una notificación de "Proyecto Dictaminado Positivo" y habilita la carga del Convenio de Colaboración para firma.
+\end{enumerate}
+
+\section{Flujo 4: Ejecución Financiera y Cierre}
+\textit{Objetivo: Dispersar recursos y comprobar gastos.}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Registro de Cuenta (Clúster):}
+    El usuario sube la carátula bancaria de la cuenta exclusiva. 
+    
+    \item \textbf{Dispersión (Finanzas):}
+    El usuario de Finanzas valida la cuenta y registra la fecha y monto de la transferencia SPEI. El estado cambia a \texttt{EN EJECUCIÓN}.
+    
+    \item \textbf{Comprobación de Gastos (Clúster):}
+    Durante los meses del proyecto, el Clúster entra a la sección "Mis Gastos".
+    \begin{itemize}
+        \item Sube XML/PDF de facturas.
+        \item Asocia cada factura a una "Partida Presupuestal" aprobada en el Flujo 2.
+        \item El sistema valida que la suma de facturas no exceda el monto de la partida.
+    \end{itemize}
+    
+    \item \textbf{Cierre y Auditoría:}
+    Al finalizar, el Clúster sube el "Reporte Final" y evidencias (Fotos). Auditoría revisa que (Facturas + Evidencias) coincidan con lo prometido. Se cierra el proyecto.
+\end{enumerate}
+
+\vspace{1cm}
+
+\begin{center}
+    \textbf{\textit{Diagrama de Estados Simplificado (Ciclo de Vida del Proyecto)}}
+    
+    \vspace{0.5cm}
+    
+    \begin{tikzpicture}[node distance=2.5cm]
+    \tikzstyle{state} = [rectangle, rounded corners, minimum width=2.5cm, minimum height=1cm,text centered, draw=black, fill=lightgray]
+    \tikzstyle{arrow} = [thick,->,>=stealth]
+
+    \node (borrador) [state] {Borrador};
+    \node (enviada) [state, right of=borrador, xshift=1cm] {Enviada};
+    \node (validacion) [state, right of=enviada, xshift=1cm] {Validación};
+    \node (dictamen) [state, below of=validacion] {Dictamen};
+    \node (ejecucion) [state, left of=dictamen, xshift=-1cm] {Ejecución};
+    \node (cierre) [state, left of=ejecucion, xshift=-1cm] {Cierre};
+
+    \draw [arrow] (borrador) -- (enviada);
+    \draw [arrow] (enviada) -- (validacion);
+    \draw [arrow] (validacion) -- (dictamen);
+    \draw [arrow] (dictamen) -- (ejecucion);
+    \draw [arrow] (ejecucion) -- (cierre);
+    \draw [arrow] (validacion) to [out=135,in=45] (borrador) node[midway, above, scale=0.7] {Corrección};
+    \end{tikzpicture}
+\end{center}
+
+\end{document}

@@ -1,0 +1,180 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{helvet}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+% Colores Institucionales
+\definecolor{navyblue}{RGB}{0, 51, 102}
+\definecolor{accentorange}{RGB}{255, 107, 0}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+
+% Configuración de encabezado
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textcolor{gray}{Flujos Detallados por Módulo}}
+\lhead{\textcolor{navyblue}{\textbf{Plataforma Integral de Clústeres NL}}}
+\rfoot{Página \thepage}
+
+\begin{document}
+
+% PORTADA
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge \textbf{\textcolor{navyblue}{Diagramas de Flujo por Módulo}}}\Показать больше
+    {\Large \textbf{Desglose Operativo: Directorio y Ventanilla Digital}}\Показать больше
+    
+    \textbf{Alcance:}\Показать больше
+    Módulo A (Directorio) + Módulo B (Ventanilla Digital)\Показать больше
+    \textbf{Fecha:}\Показать больше
+    5 de Diciembre, 2025\Показать больше
+    
+    \vfill
+    \begin{flushright}
+        \small 
+        \textbf{Documento Técnico de Referencia}\Показать больше
+        Para implementación de Lógica de Negocio (Backend)
+    \end{flushright}
+\end{titlepage}
+
+% CONTENIDO
+\section{Introducción}
+Este documento detalla la lógica secuencial de los dos grandes componentes del sistema. Cada paso representa una interacción usuario-sistema que debe ser validada por el Backend.
+
+\newpage
+
+% --- MODULO A ---
+\section{Módulo A: Directorio de Clústeres (Registro y Validación)}
+\textit{Objetivo: Crear una base de datos confiable de los 15 Clústeres estratégicos.}
+
+\subsection*{Flujo A.1: Alta de Nuevo Clúster (Onboarding)}
+\begin{enumerate}[label=\textbf{\arabic*.Показатель}]
+    \item \textbf{Solicitud de Acceso:} El Representante Legal llena el formulario público "Solicitud de Registro" (Nombre, RFC, Email Oficial).
+    \item \textbf{Verificación de Correo:} El sistema envía un token al email. El usuario da clic para activar la cuenta.
+    \item \textbf{Primer Acceso (Modo Restringido):} El usuario entra al sistema, pero solo ve la pantalla "Completar Perfil".
+    \item \textbf{Carga de Expediente Base:}
+        \begin{itemize}
+            \item Datos Generales (Logo, Dirección, Misión).
+            \item Órganos de Gobierno (Presidente, Secretario, Comités).
+            \item \textbf{Documentos Legales (Obligatorios):} Acta Constitutiva (PDF), Poder Legal (PDF), RFC (PDF).
+        \end{itemize}
+    \item \textbf{Validación Manual (Gobierno):}
+        \begin{itemize}
+            \item El Admin recibe notificación "Nuevo Clúster Registrado".
+            \item Revisa que el Acta Constitutiva coincida con la Razón Social.
+            \item \textit{Acción:} \textbf{Aprobar} (Habilita Módulo B) o \textbf{Rechazar} (Pide corrección).
+        \end{itemize}
+    \item \textbf{Publicación:} El perfil del Clúster se hace visible en el "Directorio Público" para consulta ciudadana.
+\end{enumerate}
+
+\subsection*{Flujo A.2: Registro de Empresas Asociadas}
+\textit{El Clúster es responsable de mantener actualizado su padrón de socios.}
+\begin{itemize}
+    \item El Clúster carga su lista de socios (Nombre, RFC, Sector, Tamaño).
+    \item El sistema genera estadísticas automáticas (ej. "Total de PyMEs en el sector Automotriz").
+\end{itemize}
+
+\vspace{1cm}
+\begin{center}
+    \textbf{\textit{Diagrama de Estados: Perfil del Clúster}}
+    
+    \vspace{0.5cm}
+    \begin{tikzpicture}[node distance=3cm, auto]
+        \node[draw, rectangle, rounded corners] (registro) {Registro Inicial};
+        \node[draw, rectangle, rounded corners, right of=registro] (revision) {En Revisión (Gobierno)};
+        \node[draw, rectangle, rounded corners, right of=revision] (activo) {Activo / Verificado};
+        \node[draw, rectangle, rounded corners, below of=revision] (correccion) {Requiere Cambios};
+
+        \draw[->, thick] (registro) -- (revision);
+        \draw[->, thick] (revision) -- node {Aprobar} (activo);
+        \draw[->, thick] (revision) -- node {Observación} (correccion);
+        \draw[->, thick] (correccion) -- node {Corregir} (revision);
+    \end{tikzpicture}
+\end{center}
+
+\newpage
+
+% --- MODULO B ---
+\section{Módulo B: Ventanilla Digital de Apoyos (El "Core" del Negocio)}
+\textit{Objetivo: Gestionar dinero público con trazabilidad total.}
+
+\subsection*{Flujo B.1: Configuración de Convocatoria (Gobierno)}
+\begin{enumerate}[label=\textbf{\arabic*.Показатель}]
+    \item Admin crea "Nueva Convocatoria 2025".
+    \item Define reglas:
+        \begin{itemize}
+            \item Rubros permitidos: "Capacitación" y "Certificación" (Bloquea "Eventos").
+            \item Tope máximo por proyecto: \$2,000,000 MXN.
+            \item Fecha límite: 30 de Diciembre.
+        \end{itemize}
+    \item Publica la convocatoria. Aparece en el Dashboard de todos los Clústeres Activos.
+\end{enumerate}
+
+\subsection*{Flujo B.2: Solicitud de Apoyo (Clúster)}
+\textit{Ver UI "Wizard" implementada.}
+\begin{enumerate}[label=\textbf{\arabic*.Показатель}]
+    \item \textbf{Inicio:} Clúster selecciona convocatoria y crea "Borrador".
+    \item \textbf{Captura Técnica:} Define objetivos, cronograma y beneficiarios.
+    \item \textbf{Captura Financiera (Validación Automática):}
+        \begin{itemize}
+            \item Ingresa partidas presupuestales.
+            \item El sistema valida: \textit{¿Aportación Privada $\ge$ 15\%?} \textit{¿Total $\le$ Tope Máximo?}
+            \item Si falla, bloquea el envío.
+        \end{itemize}
+    \item \textbf{Envío:} Firma digitalmente (Check de "Protesta de decir verdad"). El estado cambia a \texttt{ENVIADA}.
+\end{enumerate}
+
+\subsection*{Flujo B.3: Proceso de Aprobación (Workflow de 3 Niveles)}
+\begin{enumerate}[label=\textbf{Nivel \arabic*:}]
+    \item \textbf{Validación Documental (Analista):} Revisa que los PDFs sean legibles y vigentes. (Pasa a \texttt{VALIDADA} o \texttt{CORRECCIÓN}).
+    \item \textbf{Evaluación Técnica (Comité):} Expertos califican el proyecto. (Pasa a \texttt{DICTAMINADA}).
+    \item \textbf{Formalización (Jurídico):} Generación y firma de Convenio. (Pasa a \texttt{VIGENTE}).
+\end{enumerate}
+
+\subsection*{Flujo B.4: Ejecución y Comprobación (Finanzas)}
+\begin{enumerate}[label=\textbf{\arabic*.Показатель}]
+    \item \textbf{Ministración:} Gobierno registra el pago SPEI al Clúster.
+    \item \textbf{Comprobación Mensual:}
+        \begin{itemize}
+            \item Clúster sube Factura (XML) + Evidencia (Foto del curso).
+            \item Asocia el gasto a la partida "Renta de Salón".
+            \item Sistema descuenta del saldo disponible de esa partida.
+        \end{itemize}
+    \item \textbf{Cierre:} Cuando Saldo = \$0 y Metas = 100\%, el proyecto pasa a \texttt{CERRADO / AUDITADO}.
+\end{enumerate}
+
+\vspace{1cm}
+\begin{center}
+    \textbf{\textit{Diagrama de Estados: Ciclo de Vida del Proyecto}}
+    
+    \vspace{0.5cm}
+    \begin{tikzpicture}[node distance=2.2cm, auto, font=\footnotesize]
+        % Nodos
+        \node[draw, rectangle, rounded corners] (borrador) {1. Borrador};
+        \node[draw, rectangle, rounded corners, right of=borrador, node distance=3cm] (enviada) {2. Enviada};
+        \node[draw, rectangle, rounded corners, right of=enviada, node distance=3cm] (validacion) {3. Validación Doc.};
+        \node[draw, rectangle, rounded corners, below of=validacion] (evaluacion) {4. Evaluación Comité};
+        \node[draw, rectangle, rounded corners, left of=evaluacion, node distance=3cm] (convenio) {5. Firma Convenio};
+        \node[draw, rectangle, rounded corners, left of=convenio, node distance=3cm] (ejecucion) {6. Ejecución (Pago)};
+        \node[draw, rectangle, rounded corners, below of=ejecucion] (cierre) {7. Cierre / Auditoría};
+
+        % Flechas
+        \draw[->] (borrador) -- (enviada);
+        \draw[->] (enviada) -- (validacion);
+        \draw[->] (validacion) -- node[right] {Ok} (evaluacion);
+        \draw[->] (validacion) to[bend right] node[above] {Error} (borrador);
+        \draw[->] (evaluacion) -- node[above] {Aprobado} (convenio);
+        \draw[->] (convenio) -- (ejecucion);
+        \draw[->] (ejecucion) -- (cierre);
+    \end{tikzpicture}
+\end{center}
+
+\end{document}
