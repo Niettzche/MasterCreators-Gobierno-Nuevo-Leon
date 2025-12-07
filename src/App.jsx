@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import DirectoryView from './components/DirectoryView';
 import RegisterView from './components/RegisterView';
 import LoginView from './components/LoginView';
+import ClusterDashboard from './components/ClusterDashboard.jsx'
 import { AnimatePresence, motion } from 'framer-motion';
 import gobiernoLogo from './assets/gobierno.svg';
 
@@ -130,6 +131,7 @@ function App() {
                 <Route path="/" element={<DirectoryView />} />
                 <Route path="/register" element={<RegisterView />} />
                 <Route path="/login" element={<LoginView />} />
+                <Route path="/cluster-dashboard" element={<ClusterDashboard />} />
               </Routes>
             </AnimatePresence>
           </main>
