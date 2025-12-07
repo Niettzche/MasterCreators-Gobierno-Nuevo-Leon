@@ -6,9 +6,9 @@ Este documento lista las tareas de interfaz de usuario (UI) pendientes de implem
 
 ## 🚀 Fundacionales (Acceso y Navegación)
 
--   [ ]  **Login / Autenticación de Usuarios:**
-    -   [ ]  Crear pantalla de inicio de sesión (`LoginView.jsx`).
-    -   [ ]  Integrar validación de credenciales (mock por ahora).
+-   [x]  **Login / Autenticación de Usuarios:**
+    -   [x]  Crear pantalla de inicio de sesión (`LoginView.jsx`).
+    -   [x]  Integrar validación de credenciales (mock por ahora).
     -   [ ]  Enlace a "Olvidé mi Contraseña".
 -   [ ]  **Dashboard Layout General:**
     -   [ ]  Diseñar estructura de layout con navegación lateral adaptable (`DashboardLayout.jsx`).

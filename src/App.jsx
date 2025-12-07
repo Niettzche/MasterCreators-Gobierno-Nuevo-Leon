@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import DirectoryView from './components/DirectoryView';
 import RegisterView from './components/RegisterView';
+import LoginView from './components/LoginView';
 import { AnimatePresence, motion } from 'framer-motion';
 import gobiernoLogo from './assets/gobierno.svg';
 
@@ -128,6 +129,7 @@ function App() {
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<DirectoryView />} />
                 <Route path="/register" element={<RegisterView />} />
+                <Route path="/login" element={<LoginView />} />
               </Routes>
             </AnimatePresence>
           </main>
