@@ -2,6 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// =========================================================
+// COMPONENTE: DirectoryView
+// PROPÓSITO:
+// Vista pública del directorio de Clústeres y Empresas.
+// Permite a cualquier visitante buscar y explorar la red.
+// No requiere autenticación.
+// =========================================================
+
 // --- MOCK DATA: 15 CLUSTERS ---
 const clustersData = [
   { id: 1, name: 'Automotriz (CLAUT)', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>, members: 120, category: 'Manufactura' },

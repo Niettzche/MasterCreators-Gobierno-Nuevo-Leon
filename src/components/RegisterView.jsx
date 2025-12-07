@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import mitcLogo from '../assets/MITC.svg';
 
+// =========================================================
+// COMPONENTE: RegisterView
+// PROPÓSITO:
+// Asistente (Wizard) de registro multi-pasos para la
+// postulación de proyectos en la Ventanilla Digital.
+// Este componente encapsula la lógica de captura
+// de datos para una solicitud de apoyo.
+// =========================================================
+
 const stepContainerVariants = {
   hidden: { opacity: 0, x: 20 },
   visible: { 

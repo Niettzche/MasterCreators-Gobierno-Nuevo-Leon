@@ -3,6 +3,13 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import gobiernoLogo from '../assets/gobierno.svg'; 
 
+// =========================================================
+// COMPONENTE: LoginView
+// PROPÓSITO:
+// Interfaz de inicio de sesión para acceder al sistema interno.
+// Autentica a los usuarios con diferentes roles (SuperAdmin, Gobierno, Clúster, etc.).
+// ========================================================= 
+
 export default function LoginView() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
