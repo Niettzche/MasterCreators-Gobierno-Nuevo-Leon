@@ -5,6 +5,8 @@ import DirectoryView from './components/DirectoryView';
 import RegisterView from './components/RegisterView';
 import LoginView from './components/LoginView';
 import ClusterDashboard from './components/ClusterDashboard.jsx'
+import SuperAdminDashboard from './components/SuperAdminDashboard.jsx'
+import DashboardLayout from './components/DashboardLayout.jsx'
 import { AnimatePresence, motion } from 'framer-motion';
 import gobiernoLogo from './assets/gobierno.svg';
 
@@ -114,6 +116,8 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  const showNavbar = !['/cluster-dashboard', '/dashboard', '/admin-dashboard', '/login'].some(path => location.pathname.startsWith(path));
+
   return (
     <div className="bg-background-alternate text-text-body antialiased min-h-screen flex flex-col overflow-hidden">
       <AnimatePresence mode="wait">
@@ -124,14 +128,16 @@ function App() {
 
       {!showAnimation && (
         <>
-          <Navbar />
+          {showNavbar && <Navbar />}
           <main className="flex-1 relative overflow-hidden flex">
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<DirectoryView />} />
                 <Route path="/register" element={<RegisterView />} />
                 <Route path="/login" element={<LoginView />} />
-                <Route path="/cluster-dashboard" element={<ClusterDashboard />} />
+                <Route path="/cluster-dashboard" element={<DashboardLayout><ClusterDashboard /></DashboardLayout>} />
+                <Route path="/dashboard/*" element={<DashboardLayout><ClusterDashboard /></DashboardLayout>} />
+                <Route path="/admin-dashboard/*" element={<DashboardLayout><SuperAdminDashboard /></DashboardLayout>} />
               </Routes>
             </AnimatePresence>
           </main>
