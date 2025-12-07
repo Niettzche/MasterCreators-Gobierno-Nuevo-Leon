@@ -13,15 +13,27 @@ Este documento lista las tareas de interfaz de usuario (UI) pendientes de implem
 -   [x]  **Dashboard Layout General:**
     -   [x]  Diseñar estructura de layout con navegación lateral adaptable (`DashboardLayout.jsx`).
     -   [x]  Implementar navegación dinámica según el rol del usuario.
--   [ ]  **Dashboard del Clúster ("Mis Trámites"):**
-    -   [ ]  Crear vista principal para usuarios de tipo Clúster.
-    -   [ ]  Listado de "Mis Proyectos" (tabla con Nombre, Convocatoria, Estado, Fecha).
+-   [x]  **Dashboard del Clúster ("Mis Trámites"):**
+    -   [x]  Crear vista principal para usuarios de tipo Clúster (`ClusterDashboard.jsx`).
+    -   [x]  Listado de "Mis Proyectos" (Visualización de línea de tiempo y estatus).
     -   [ ]  Listado de "Convocatorias Abiertas" (tarjetas o lista).
-    -   [ ]  Notificaciones/Alertas de acciones pendientes (ej. "Tienes una aclaración pendiente").
+    -   [x]  Notificaciones/Alertas de acciones pendientes (Tabla de vencimientos).
 -   [ ]  **Dashboard de Gobierno ("Bandeja de Entrada")**:
     -   [ ]  Crear vista principal para roles de Gobierno (Dirección, Finanzas, Comité, Auditoría).
     -   [ ]  Panel de KPIs básicos (solicitudes en curso, pendientes).
     -   [ ]  Tabla de Proyectos por Revisar/Evaluar (con filtros por estado, convocatoria, clúster).
+
+---
+
+## 🎨 Perfeccionamiento de UI / UX (Global)
+
+-   [ ]  **Estandarización Visual de Roles:**
+    -   [ ]  **Clúster:** Asegurar que todas las vistas internas mantengan la calidad del Dashboard.
+    -   [ ]  **Admin / Gobierno:** Diseñar y pulir las vistas de administración con el mismo nivel de detalle.
+    -   [ ]  **Finanzas:** Diseñar vistas específicas para flujo de recursos.
+-   [ ]  **Layout y Responsividad:**
+    -   [ ]  Verificar el uso del ancho completo en todas las pantallas.
+    -   [ ]  Ajustes finos de padding y márgenes negativos en contenedores principales.
 
 ---
 

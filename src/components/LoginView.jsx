@@ -20,8 +20,10 @@ export default function LoginView() {
     { email: 'superadmin@test.com', password: 'password', role: 'superadmin' },
     { email: 'gobierno@test.com', password: 'password', role: 'gobierno' },
     { email: 'cluster@test.com', password: 'password', role: 'cluster' },
+    { email: 'evaluator@test.com', password: 'password', role: 'evaluator' },
     { email: 'comite@test.com', password: 'password', role: 'comite' },
     { email: 'finanzas@test.com', password: 'password', role: 'finanzas' },
+    { email: 'auditor@test.com', password: 'password', role: 'auditor' },
   ];
 
   const handleLogin = (e) => {
@@ -36,6 +38,12 @@ export default function LoginView() {
         navigate('/admin-dashboard'); 
       } else if (user.role === 'cluster') {
         navigate('/cluster-dashboard'); 
+      } else if (user.role === 'evaluator') {
+        navigate('/evaluator-dashboard');
+      } else if (user.role === 'finanzas') {
+        navigate('/finance-dashboard');
+      } else if (user.role === 'auditor') { // New redirection for auditor role
+        navigate('/audit-dashboard');
       } else {
         navigate('/dashboard'); 
       }

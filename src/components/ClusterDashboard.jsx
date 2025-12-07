@@ -6,239 +6,256 @@ import { useNavigate } from 'react-router-dom';
 // COMPONENTE: ClusterDashboard
 // PROPÓSITO:
 // Vista principal para el ROL: CLÚSTER (Solicitante).
-// Adaptada del mockup "Cluster Command Center" (@mockup/dashboardcluster.html).
+// Refleja la estructura de la "Plataforma Integral":
+// - Módulo A: Directorio (Perfil y Empresas)
+// - Módulo B: Ventanilla Digital (Proyectos y Apoyos)
 // =========================================================
+
+// Mock Data: Proyectos del usuario
+const mockProjects = [
+  { 
+    id: 1, 
+    folio: 'NL-2025-0012', 
+    name: 'Programa de Certificación IATF 16949', 
+    program: 'Fortalecimiento Industrial 2025', 
+    date: '2025-02-15', 
+    amount: 1200000, 
+    status: 'EN_REVISION' 
+  },
+  { 
+    id: 2, 
+    folio: 'NL-2025-0045', 
+    name: 'Encuentro de Negocios Tier 1', 
+    program: 'Vinculación Comercial', 
+    date: '2025-03-10', 
+    amount: 450000, 
+    status: 'BORRADOR' 
+  },
+  { 
+    id: 3, 
+    folio: 'NL-2024-0982', 
+    name: 'Capacitación en Ciberseguridad Industrial', 
+    program: 'Innovación Tecnológica 2024', 
+    date: '2024-11-20', 
+    amount: 800000, 
+    status: 'APROBADO' 
+  }
+];
+
+// Helper para colores de estatus
+const getStatusBadge = (status) => {
+  const styles = {
+    BORRADOR: 'bg-slate-100 text-slate-600 border-slate-200',
+    EN_REVISION: 'bg-blue-50 text-blue-700 border-blue-200',
+    REQUIERE_CAMBIOS: 'bg-orange-50 text-orange-700 border-orange-200',
+    APROBADO: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    RECHAZADO: 'bg-red-50 text-red-700 border-red-200',
+  };
+  
+  const labels = {
+    BORRADOR: 'Borrador',
+    EN_REVISION: 'En Revisión',
+    REQUIERE_CAMBIOS: 'Requiere Atención',
+    APROBADO: 'Aprobado',
+    RECHAZADO: 'Rechazado'
+  };
+
+  return (
+    <span className={`px-3 py-1 rounded-full text-xs font-bold border ${styles[status] || styles.BORRADOR}`}>
+      {labels[status] || status}
+    </span>
+  );
+};
 
 export default function ClusterDashboard() {
   const navigate = useNavigate();
 
   return (
-    // WRAPPER: Se expande sobre el padding del Layout padre (-m-8) y restaura el padding interno (p-8).
-    // w-[calc(100%+4rem)] asegura que ocupe el 100% del ancho del layout padre compensando los márgenes negativos.
-    <div className="-m-8 p-8 w-[calc(100%+4rem)] space-y-6 font-sans text-slate-800">
+    <div className="-m-8 p-8 w-[calc(100%+4rem)] space-y-8">
       
-      {/* --- SECCIÓN DE KPIs --- */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        {/* KPI 1 */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all"
-        >
-          <div className="flex justify-between items-start mb-4">
-            <span className="text-sm font-bold text-slate-500">Proyectos Activos</span>
-            <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-          </div>
-          <div className="text-3xl font-extrabold text-slate-900 mb-2">3</div>
-          <div className="flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 w-fit px-2 py-1 rounded">
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-            <span>2 en Validación</span>
-          </div>
-        </motion.div>
+      {/* HEADER PRINCIPAL DE LA PLATAFORMA */}
+      <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+        {/* Decoración de fondo */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-orange-50 to-transparent rounded-full -mr-20 -mt-20 opacity-60"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-blue-50 to-transparent rounded-full -ml-20 -mb-20 opacity-60"></div>
 
-        {/* KPI 2 */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all"
-        >
-          <div className="flex justify-between items-start mb-4">
-            <span className="text-sm font-bold text-slate-500">Financiamiento Total</span>
-            <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div className="relative z-10">
+          <h1 className="text-3xl md:text-4xl font-black text-slate-800 tracking-tight mb-2">
+            Plataforma Integral de Clústeres
+          </h1>
+          <p className="text-lg text-slate-600 font-medium">
+            Gobierno del Estado de Nuevo León
+          </p>
+          <div className="mt-6 flex flex-wrap gap-4">
+             <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200">
+               Clúster Automotriz de Nuevo León, A.C.
+             </span>
+             <span className="px-3 py-1 bg-green-50 text-green-700 rounded-lg text-sm font-semibold border border-green-200 flex items-center gap-2">
+               <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+               Estatus: Activo
+             </span>
           </div>
-          <div className="text-3xl font-extrabold text-slate-900 mb-2">$15.0M</div>
-          <div className="flex items-center gap-1 text-xs font-bold text-amber-600 bg-amber-50 w-fit px-2 py-1 rounded">
-            <span>75% Dispersado</span>
-          </div>
-        </motion.div>
-
-        {/* KPI 3 */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all"
-        >
-          <div className="flex justify-between items-start mb-4">
-            <span className="text-sm font-bold text-slate-500">Ejecución Recursos</span>
-            <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-          </div>
-          <div className="text-3xl font-extrabold text-slate-900 mb-2">$9.5M</div>
-          <div className="flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 w-fit px-2 py-1 rounded">
-            <span>63% Comprobado</span>
-          </div>
-        </motion.div>
-
-        {/* KPI 4 */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all"
-        >
-          <div className="flex justify-between items-start mb-4">
-            <span className="text-sm font-bold text-slate-500">Metas Cumplidas</span>
-            <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          </div>
-          <div className="text-3xl font-extrabold text-slate-900 mb-2">
-            120<span className="text-lg text-slate-400 font-normal ml-1">/ 150</span>
-          </div>
-          <div className="flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 w-fit px-2 py-1 rounded">
-            <span>80% Avance Global</span>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* --- GRID PRINCIPAL (Proyectos + Gráfico) --- */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        {/* TIMELINE DE PROYECTOS (2/3 Ancho) */}
-        <motion.div 
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
-          className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6"
-        >
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-lg font-bold text-slate-800">Estado de Proyectos Recientes</h2>
-            <button className="text-sm text-orange-600 font-bold hover:text-orange-800 flex items-center gap-1 transition-colors">
-              Ver todos <span>&rarr;</span>
-            </button>
-          </div>
-
-          {/* Project 1 */}
-          <div className="mb-10">
-            <div className="flex justify-between items-center mb-4">
-              <span className="font-bold text-slate-800 text-sm">Proyecto Capacitación Dual 2025</span>
-              <span className="text-xs text-slate-400">Actualizado: hace 2 horas</span>
-            </div>
-            
-            {/* Timeline Track */}
-            <div className="relative h-1.5 bg-slate-100 rounded-full mb-3 mx-4">
-              <div className="absolute left-0 top-0 h-full bg-orange-500 rounded-full transition-all duration-1000" style={{ width: '50%' }}></div>
-              
-              {/* Steps Dots */}
-              <div className="absolute inset-0 flex justify-between items-center -mt-[3px]">
-                 {/* Steps: Borrador, Enviado, Validación (Active), Aprobado, Cierre */}
-                 {[true, true, 'active', false, false].map((state, i) => (
-                    <div key={i} className={`w-3 h-3 rounded-full border-2 ${state === 'active' ? 'bg-orange-500 border-orange-500 ring-4 ring-orange-100 scale-110' : state ? 'bg-orange-500 border-orange-500' : 'bg-white border-slate-200'} z-10`}></div>
-                 ))}
-              </div>
-            </div>
-            <div className="flex justify-between px-1">
-               <span className="text-[10px] text-slate-400 font-medium w-12 text-center">Borrador</span>
-               <span className="text-[10px] text-slate-400 font-medium w-12 text-center">Enviado</span>
-               <span className="text-[10px] text-orange-600 font-bold w-12 text-center">Validación</span>
-               <span className="text-[10px] text-slate-400 font-medium w-12 text-center">Aprobado</span>
-               <span className="text-[10px] text-slate-400 font-medium w-12 text-center">Cierre</span>
-            </div>
-          </div>
-          
-          <hr className="border-t border-slate-50 my-8" />
-
-          {/* Project 2 */}
-          <div>
-            <div className="flex justify-between items-center mb-4">
-              <span className="font-bold text-slate-800 text-sm">Certificación Proveedores Tier 2</span>
-              <span className="text-xs text-slate-400">Estado: En Ejecución</span>
-            </div>
-            
-             {/* Timeline Track */}
-             <div className="relative h-1.5 bg-slate-100 rounded-full mb-3 mx-4">
-              <div className="absolute left-0 top-0 h-full bg-orange-500 rounded-full transition-all duration-1000" style={{ width: '75%' }}></div>
-              
-              {/* Steps Dots */}
-              <div className="absolute inset-0 flex justify-between items-center -mt-[3px]">
-                 {/* Steps: Borrador, Enviado, Validación, Ejecución (Active), Cierre */}
-                 {[true, true, true, 'active', false].map((state, i) => (
-                    <div key={i} className={`w-3 h-3 rounded-full border-2 ${state === 'active' ? 'bg-orange-500 border-orange-500 ring-4 ring-orange-100 scale-110' : state ? 'bg-orange-500 border-orange-500' : 'bg-white border-slate-200'} z-10`}></div>
-                 ))}
-              </div>
-            </div>
-            <div className="flex justify-between px-1">
-               <span className="text-[10px] text-slate-400 font-medium w-12 text-center">Borrador</span>
-               <span className="text-[10px] text-slate-400 font-medium w-12 text-center">Enviado</span>
-               <span className="text-[10px] text-slate-400 font-medium w-12 text-center">Validación</span>
-               <span className="text-[10px] text-orange-600 font-bold w-12 text-center">Ejecución</span>
-               <span className="text-[10px] text-slate-400 font-medium w-12 text-center">Cierre</span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* GRÁFICO DE FLUJO (1/3 Ancho) */}
-        <motion.div 
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.6 }}
-          className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col"
-        >
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-lg font-bold text-slate-800">Flujo de Recursos</h2>
-            <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
-          </div>
-          
-          <div className="flex-1 flex items-end justify-around pt-4 pb-2">
-             {/* CSS Bar Chart */}
-             {[
-               { l: 'Ene', h1: '60px', h2: '40px' },
-               { l: 'Feb', h1: '80px', h2: '70px' },
-               { l: 'Mar', h1: '120px', h2: '50px' },
-               { l: 'Abr', h1: '90px', h2: '20px', secondary: true },
-             ].map((bar, i) => (
-               <div key={i} className="flex flex-col items-center gap-2 w-[15%] group">
-                  <div className="w-full bg-slate-50 rounded-t-sm relative overflow-hidden group-hover:bg-slate-100 transition-colors" style={{ height: bar.h1 }}>
-                    <div className={`absolute bottom-0 w-full rounded-t-sm ${bar.secondary ? 'bg-slate-700 opacity-80' : 'bg-orange-500'}`} style={{ height: bar.h2 }}></div>
-                  </div>
-                  <span className="text-[10px] text-slate-400 font-medium uppercase">{bar.l}</span>
-               </div>
-             ))}
-          </div>
-          
-          <div className="mt-6 flex justify-center gap-4 text-[10px] text-slate-500 font-medium">
-             <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-orange-500"></span> Dispersado</div>
-             <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-slate-700"></span> Ejecutado</div>
-          </div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* --- TABLA DE VENCIMIENTOS --- */}
+      {/* SECCIÓN DE MÓDULOS (A y B) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        {/* MÓDULO A: DIRECTORIO */}
+        <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col"
+        >
+            <div className="p-6 border-b border-slate-100 bg-slate-50/50">
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
+                    <div>
+                        <h2 className="text-lg font-bold text-slate-800">Directorio de Clústeres</h2>
+                        <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Módulo A</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div className="p-6 flex-1 flex flex-col gap-4">
+                <p className="text-slate-600 text-sm">
+                    Gestione la información institucional, órganos de gobierno y el padrón de empresas asociadas.
+                </p>
+                
+                <div className="space-y-3 mt-2">
+                    <div className="flex items-center justify-between text-sm p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <span className="text-slate-600 font-medium">Perfil Institucional</span>
+                        <span className="text-emerald-600 font-bold flex items-center gap-1.5 bg-white px-2 py-0.5 rounded shadow-sm border border-emerald-100 text-xs">
+                            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> 100% Completo
+                        </span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <span className="text-slate-600 font-medium">Empresas Asociadas</span>
+                        <span className="font-bold text-slate-800 bg-white px-2 py-0.5 rounded shadow-sm border border-slate-200 text-xs">
+                            45 Registradas
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="p-4 bg-slate-50 border-t border-slate-100 flex gap-3">
+                <button className="flex-1 py-2.5 px-4 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all text-sm shadow-sm">
+                    Ver Empresas
+                </button>
+                <button className="flex-1 py-2.5 px-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all text-sm">
+                    Actualizar Perfil
+                </button>
+            </div>
+        </motion.div>
+
+        {/* MÓDULO B: VENTANILLA DIGITAL */}
+        <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ delay: 0.1 }}
+            className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col"
+        >
+            <div className="p-6 border-b border-slate-100 bg-slate-50/50">
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 011.414.586l4 4a1 1 0 01.586 1.414V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <div>
+                        <h2 className="text-lg font-bold text-slate-800">Ventanilla Digital</h2>
+                        <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Módulo B - Apoyos</p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="p-6 flex-1 flex flex-col gap-4">
+                <p className="text-slate-600 text-sm">
+                    Ciclo completo de gestión de apoyos: convocatorias, postulación, seguimiento y cierre de proyectos.
+                </p>
+
+                <div className="grid grid-cols-3 gap-3 mt-2">
+                    <div className="p-3 bg-orange-50 rounded-xl border border-orange-100 text-center">
+                        <div className="text-2xl font-bold text-orange-600">1</div>
+                        <div className="text-[10px] text-orange-800 font-bold uppercase mt-1">En Proceso</div>
+                    </div>
+                    <div className="p-3 bg-blue-50 rounded-xl border border-blue-100 text-center">
+                        <div className="text-2xl font-bold text-blue-600">3</div>
+                        <div className="text-[10px] text-blue-800 font-bold uppercase mt-1">Historial</div>
+                    </div>
+                    <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-100 text-center">
+                        <div className="text-2xl font-bold text-emerald-600">$800k</div>
+                        <div className="text-[10px] text-emerald-800 font-bold uppercase mt-1">Aprobado</div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="p-4 bg-slate-50 border-t border-slate-100">
+                <button 
+                  onClick={() => navigate('/register')}
+                  className="w-full py-2.5 px-4 bg-orange-600 text-white font-bold rounded-xl hover:bg-orange-700 shadow-lg shadow-orange-500/20 transition-all text-sm flex items-center justify-center gap-2"
+                >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
+                    Nueva Solicitud de Apoyo
+                </button>
+            </div>
+        </motion.div>
+
+      </div>
+
+      {/* SECCIÓN INFERIOR: TABLA DE PROYECTOS (DETALLE VENTANILLA) */}
       <motion.div 
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7 }}
-        className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden"
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        transition={{ delay: 0.2 }}
+        className="pt-4"
       >
-        <div className="p-6 border-b border-slate-100">
-            <h2 className="text-lg font-bold text-slate-800">Próximos Vencimientos</h2>
+        <div className="flex items-center justify-between mb-4 px-1">
+            <h3 className="text-lg font-bold text-slate-800">Seguimiento de Proyectos Recientes</h3>
+            <button className="text-sm text-blue-600 font-medium hover:text-blue-800 flex items-center gap-1">
+                Ver todos
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
         </div>
-        <div className="overflow-x-auto">
+
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-                <thead>
-                    <tr className="text-slate-400 font-medium border-b border-slate-100">
-                        <th className="px-6 py-3">Documento / Acción</th>
-                        <th className="px-6 py-3">Proyecto</th>
-                        <th className="px-6 py-3">Fecha Límite</th>
-                        <th className="px-6 py-3">Estado</th>
-                    </tr>
+                <thead className="bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider">
+                <tr>
+                    <th className="p-4">Folio</th>
+                    <th className="p-4">Proyecto</th>
+                    <th className="p-4">Programa / Convocatoria</th>
+                    <th className="p-4 text-right">Monto</th>
+                    <th className="p-4 text-center">Estatus</th>
+                    <th className="p-4 text-center">Acciones</th>
+                </tr>
                 </thead>
-                <tbody>
-                    <tr className="border-b border-slate-50 hover:bg-slate-50 transition-colors group">
-                        <td className="px-6 py-4 font-semibold text-slate-700 group-hover:text-orange-600 transition-colors">Reporte Trimestral Q1</td>
-                        <td className="px-6 py-4 text-slate-500">Capacitación Dual</td>
-                        <td className="px-6 py-4 text-amber-500 font-bold">15 Abr 2025</td>
-                        <td className="px-6 py-4"><span className="bg-amber-50 text-amber-600 px-2 py-1 rounded text-xs font-bold border border-amber-100">Pendiente</span></td>
+                <tbody className="divide-y divide-slate-100">
+                {mockProjects.map((project) => (
+                    <tr key={project.id} className="hover:bg-slate-50 transition-colors">
+                    <td className="p-4 font-mono text-slate-600 text-xs">{project.folio}</td>
+                    <td className="p-4 font-bold text-slate-800">{project.name}</td>
+                    <td className="p-4 text-slate-500">
+                        {project.program}
+                        <div className="text-xs text-slate-400 mt-1">Registrado: {project.date}</div>
+                    </td>
+                    <td className="p-4 text-right font-medium text-slate-700">
+                        ${project.amount.toLocaleString()}
+                    </td>
+                    <td className="p-4 text-center">
+                        {getStatusBadge(project.status)}
+                    </td>
+                    <td className="p-4 text-center">
+                        <button className="text-slate-500 hover:text-orange-600 font-medium transition-colors p-2 hover:bg-orange-50 rounded-lg">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                        </button>
+                    </td>
                     </tr>
-                    <tr className="hover:bg-slate-50 transition-colors group">
-                        <td className="px-6 py-4 font-semibold text-slate-700 group-hover:text-orange-600 transition-colors">Factura #A-9920 (Proveedor TI)</td>
-                        <td className="px-6 py-4 text-slate-500">Certificación Tier 2</td>
-                        <td className="px-6 py-4 text-slate-800 font-medium">20 Abr 2025</td>
-                        <td className="px-6 py-4"><span className="bg-emerald-50 text-emerald-600 px-2 py-1 rounded text-xs font-bold border border-emerald-100">Validado</span></td>
-                    </tr>
+                ))}
                 </tbody>
             </table>
+            </div>
         </div>
       </motion.div>
 

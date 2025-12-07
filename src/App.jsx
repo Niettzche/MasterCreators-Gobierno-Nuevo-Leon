@@ -6,6 +6,9 @@ import RegisterView from './components/RegisterView';
 import LoginView from './components/LoginView';
 import ClusterDashboard from './components/ClusterDashboard.jsx'
 import SuperAdminDashboard from './components/SuperAdminDashboard.jsx'
+import EvaluatorDashboard from './components/EvaluatorDashboard.jsx'
+import FinanceDashboard from './components/FinanceDashboard.jsx'
+import AuditDashboard from './components/AuditDashboard.jsx'
 import DashboardLayout from './components/DashboardLayout.jsx'
 import { AnimatePresence, motion } from 'framer-motion';
 import gobiernoLogo from './assets/gobierno.svg';
@@ -116,7 +119,7 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  const showNavbar = !['/cluster-dashboard', '/dashboard', '/admin-dashboard', '/login'].some(path => location.pathname.startsWith(path));
+  const showNavbar = !['/audit-dashboard','/cluster-dashboard', '/finance-dashboard', '/admin-dashboard', '/login', '/evaluator-dashboard'].some(path => location.pathname.startsWith(path));
 
   return (
     <div className="bg-background-alternate text-text-body antialiased min-h-screen flex flex-col overflow-hidden">
@@ -138,6 +141,9 @@ function App() {
                 <Route path="/cluster-dashboard" element={<DashboardLayout><ClusterDashboard /></DashboardLayout>} />
                 <Route path="/dashboard/*" element={<DashboardLayout><ClusterDashboard /></DashboardLayout>} />
                 <Route path="/admin-dashboard/*" element={<DashboardLayout><SuperAdminDashboard /></DashboardLayout>} />
+                <Route path="/evaluator-dashboard/*" element={<DashboardLayout><EvaluatorDashboard /></DashboardLayout>} />
+                <Route path="/finance-dashboard/*" element={<DashboardLayout><FinanceDashboard /></DashboardLayout>} />
+                <Route path="/audit-dashboard/*" element={<DashboardLayout><AuditDashboard /></DashboardLayout>} />
               </Routes>
             </AnimatePresence>
           </main>
