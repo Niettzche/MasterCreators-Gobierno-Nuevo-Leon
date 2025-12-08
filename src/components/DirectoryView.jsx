@@ -2,6 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import clautLogo from '../assets/logos/claut.jpg';
+import csoftmtyLogo from '../assets/logos/csoftmty.jpg';
+import clelacLogo from '../assets/logos/clelac.jpg';
+import aeroclusterLogo from '../assets/logos/aerocluster.jpg';
+import agroalimLogo from '../assets/logos/agroalim.jpg';
+import energeticoLogo from '../assets/logos/energetico.jpg';
+import saludLogo from '../assets/logos/salud.jpg';
+import viviendaLogo from '../assets/logos/vivienda.jpg';
+import bioclusterLogo from '../assets/logos/biocluster.jpg';
+import nanoLogo from '../assets/logos/nano.jpg';
+import mimecLogo from '../assets/logos/mimec.jpg';
+import herramentalesLogo from '../assets/logos/herramentales.jpg';
+import turismoLogo from '../assets/logos/turismo.jpg';
+
 // =========================================================
 // COMPONENTE: DirectoryView
 // PROPÓSITO:
@@ -12,20 +26,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // --- MOCK DATA: 15 CLUSTERS ---
 const clustersData = [
-  { id: 1, name: 'Automotriz (CLAUT)', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>, members: 120, category: 'Manufactura' },
-  { id: 2, name: 'Software / TI (Csoftmty)', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>, members: 450, category: 'Tecnología' },
-  { id: 3, name: 'Electrodomésticos (CLELAC)', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>, members: 85, category: 'Manufactura' },
-  { id: 4, name: 'Aeroespacial', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>, members: 40, category: 'Manufactura' },
-  { id: 5, name: 'Agroalimentario', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>, members: 110, category: 'Consumo' },
-  { id: 6, name: 'Energía', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, members: 75, category: 'Industria' },
-  { id: 7, name: 'Salud', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>, members: 90, category: 'Servicios' },
-  { id: 8, name: 'Vivienda y Desarrollo', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>, members: 200, category: 'Servicios' },
-  { id: 9, name: 'Biotecnología', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>, members: 35, category: 'Ciencia' },
-  { id: 10, name: 'Nanotecnología', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>, members: 25, category: 'Ciencia' },
-  { id: 11, name: 'Medios Creativos', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>, members: 60, category: 'Tecnología' },
+  { id: 1, name: 'Automotriz (CLAUT)', icon: <img src={clautLogo} alt="CLAUT" className="w-full h-full object-contain p-1" />, members: 120, category: 'Manufactura' },
+  { id: 2, name: 'Software / TI (Csoftmty)', icon: <img src={csoftmtyLogo} alt="Csoftmty" className="w-full h-full object-contain p-1" />, members: 450, category: 'Tecnología' },
+  { id: 3, name: 'Electrodomésticos (CLELAC)', icon: <img src={clelacLogo} alt="CLELAC" className="w-full h-full object-contain p-1" />, members: 85, category: 'Manufactura' },
+  { id: 4, name: 'Aeroespacial', icon: <img src={aeroclusterLogo} alt="Aeroespacial" className="w-full h-full object-contain p-1" />, members: 40, category: 'Manufactura' },
+  { id: 5, name: 'Agroalimentario', icon: <img src={agroalimLogo} alt="Agroalimentario" className="w-full h-full object-contain p-1" />, members: 110, category: 'Consumo' },
+  { id: 6, name: 'Energía', icon: <img src={energeticoLogo} alt="Energía" className="w-full h-full object-contain p-1" />, members: 75, category: 'Industria' },
+  { id: 7, name: 'Salud', icon: <img src={saludLogo} alt="Salud" className="w-full h-full object-contain p-1" />, members: 90, category: 'Servicios' },
+  { id: 8, name: 'Vivienda y Desarrollo', icon: <img src={viviendaLogo} alt="Vivienda" className="w-full h-full object-contain p-1" />, members: 200, category: 'Servicios' },
+  { id: 9, name: 'Biotecnología', icon: <img src={bioclusterLogo} alt="Biotecnología" className="w-full h-full object-contain p-1" />, members: 35, category: 'Ciencia' },
+  { id: 10, name: 'Nanotecnología', icon: <img src={nanoLogo} alt="Nanotecnología" className="w-full h-full object-contain p-1" />, members: 25, category: 'Ciencia' },
+  { id: 11, name: 'Medios Creativos', icon: <img src={mimecLogo} alt="MIMEC" className="w-full h-full object-contain p-1" />, members: 60, category: 'Tecnología' },
   { id: 12, name: 'Logística y Transporte', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg>, members: 150, category: 'Servicios' },
-  { id: 13, name: 'Herramentales', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>, members: 180, category: 'Manufactura' },
-  { id: 14, name: 'Turismo', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>, members: 300, category: 'Servicios' },
+  { id: 13, name: 'Herramentales', icon: <img src={herramentalesLogo} alt="Herramentales" className="w-full h-full object-contain p-1" />, members: 180, category: 'Manufactura' },
+  { id: 14, name: 'Turismo', icon: <img src={turismoLogo} alt="Turismo" className="w-full h-full object-contain p-1" />, members: 300, category: 'Servicios' },
   { id: 15, name: 'Gastronómico', icon: <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" /></svg>, members: 500, category: 'Consumo' },
 ];
 
@@ -612,7 +626,7 @@ export default function DirectoryView() {
                     className="group bg-white border border-gray-200 rounded-xl p-6 cursor-pointer hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
                   >
                     <div className="flex justify-between items-start mb-4">
-                      <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300 text-primary">
+                      <div className="w-14 h-14 rounded-lg bg-white flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300 text-primary">
                         {cluster.icon}
                       </div>
                       <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2 py-1 rounded-full">

@@ -177,4 +177,93 @@ Este documento detalla la lógica secuencial de los dos grandes componentes del 
     \end{tikzpicture}
 \end{center}
 
+\newpage
+\section{Anexo Técnico: Documentación de Dashboards}
+A continuación se describe la funcionalidad detallada de los Tableros de Control (Dashboards) implementados para cada rol de usuario en la plataforma.
+
+\subsection{1. Dashboard de Clúster (Solicitante)}
+\textbf{Archivo Fuente:} \texttt{src/components/ClusterDashboard.jsx} \\
+\textbf{Rol:} Clúster / Representante Legal
+
+Este tablero funge como el centro de operaciones para los usuarios externos. Consolida la información de los dos módulos principales (Directorio y Ventanilla).
+
+\begin{itemize}
+    \item \textbf{Encabezado Principal:} Muestra la identidad del Clúster logueado y su estatus operativo (Activo/Inactivo).
+    \item \textbf{Tarjeta Módulo A (Directorio):}
+    \begin{itemize}
+        \item Visualiza el porcentaje de completitud del perfil institucional.
+        \item Muestra el contador de empresas asociadas registradas.
+        \item Botones de acción: "Ver Empresas" (Listado) y "Actualizar Perfil" (Edición de datos).
+    \end{itemize}
+    \item \textbf{Tarjeta Módulo B (Ventanilla Digital):}
+    \begin{itemize}
+        \item Resumen de actividad: Solicitudes en proceso, historial y monto total aprobado.
+        \item \textbf{Acción Principal:} Botón "Nueva Solicitud de Apoyo" que inicia el Wizard de captura.
+    \end{itemize}
+    \item \textbf{Tabla de Seguimiento:} Listado de los últimos proyectos con indicadores visuales de estatus (Borrador, En Revisión, Aprobado) y montos solicitados.
+\end{itemize}
+
+\subsection{2. Dashboard de Gobierno (Super Admin)}
+\textbf{Archivo Fuente:} \texttt{src/components/SuperAdminDashboard.jsx} \\
+\textbf{Rol:} Dirección de Clústeres / Admin Gobierno
+
+Tablero de mando para la visión global del programa. Se enfoca en alertas y gestión de alto nivel.
+
+\begin{itemize}
+    \item \textbf{Grid de KPIs (Indicadores Clave):}
+    \begin{itemize}
+        \item \textbf{Por Validar:} Conteo de solicitudes pendientes, destacando las que requieren atención urgente.
+        \item \textbf{Convocatorias Activas:} Número de convocatorias abiertas y alertas de cierre próximo.
+        \item \textbf{Presupuesto Global:} Monitor del ejercicio fiscal 2025 y porcentaje de asignación.
+        \item \textbf{Clústeres:} Avance de la meta de registro de los 15 clústeres estratégicos.
+    \end{itemize}
+    \item \textbf{Bandeja de Entrada (Feed de Actividad):} Lista cronológica de eventos del sistema (nuevas solicitudes, reportes mensuales, registros) con acciones rápidas contextuales (ej. "Revisar Documentos").
+    \item \textbf{Estado de Convocatorias:} Barras de progreso que comparan el número de solicitudes recibidas vs la meta establecida para cada programa.
+\end{itemize}
+
+\subsection{3. Dashboard de Evaluación (Comité)}
+\textbf{Archivo Fuente:} \texttt{src/components/EvaluatorDashboard.jsx} \\
+\textbf{Rol:} Evaluador Técnico / Comité
+
+Interfaz simplificada y focalizada en la revisión cualitativa de proyectos.
+
+\begin{itemize}
+    \item \textbf{Gestión de Asignaciones:} Muestra únicamente los expedientes asignados al usuario evaluador logueado.
+    \item \textbf{Tabla de Evaluación:}
+    \begin{itemize}
+        \item Datos clave: Proyecto, Clúster solicitante y Fechas.
+        \item \textbf{Semáforo de Fechas:} Resalta en rojo las fechas límite próximas a vencer.
+        \item \textbf{Acción "Evaluar":} Redirige a la vista de detalle para capturar la calificación técnica.
+    \end{itemize}
+\end{itemize}
+
+\subsection{4. Dashboard Financiero (Tesorería)}
+\textbf{Archivo Fuente:} \texttt{src/components/FinanceDashboard.jsx} \\
+\textbf{Rol:} Secretaría de Finanzas / Pagos
+
+Herramienta para el control de flujos de efectivo y validación de requisitos fiscales.
+
+\begin{itemize}
+    \item \textbf{Validación de Cuentas:} KPI y acceso directo a las cuentas bancarias nuevas que requieren validación de carátula antes de poder recibir pagos.
+    \item \textbf{Control de Dispersión:}
+    \begin{itemize}
+        \item KPI de monto total "Pendiente de Pago".
+        \item Tabla detallada de proyectos aprobados listos para dispersión SPEI.
+        \item Botón "Registrar Pago" para confirmar la transacción y notificar al Clúster.
+    \end{itemize}
+    \item \textbf{Monitor Presupuestal:} Indicador de suficiencia presupuestal en tiempo real.
+\end{itemize}
+
+\subsection{5. Dashboard de Auditoría (Contraloría)}
+\textbf{Archivo Fuente:} \texttt{src/components/AuditDashboard.jsx} \\
+\textbf{Rol:} Órgano Interno de Control / Auditor Externo
+
+Enfocado en la revisión ex-post y la trazabilidad de expedientes cerrados.
+
+\begin{itemize}
+    \item \textbf{Matriz de Riesgo:} Tabla de proyectos cerrados clasificados por nivel de riesgo (Alto/Medio/Bajo) para priorizar auditorías.
+    \item \textbf{Buscador Universal:} Herramienta para localizar cualquier expediente por folio, RFC o palabra clave.
+    \item \textbf{Control de Observaciones:} KPI que monitorea las observaciones de auditoría abiertas y críticas pendientes de solventar.
+\end{itemize}
+
 \end{document}

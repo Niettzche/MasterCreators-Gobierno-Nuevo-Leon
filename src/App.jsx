@@ -14,6 +14,7 @@ import DigitalVault from './components/DigitalVault.jsx'
 import ClusterFinances from './components/ClusterFinances.jsx'
 import ClusterProfile from './components/ClusterProfile.jsx'
 import AuditFindings from './components/AuditFindings.jsx'
+import RegisterView from './components/RegisterView.jsx'
 import EvaluationRoom from './components/EvaluationRoom.jsx'
 import BankAccountValidation from './components/BankAccountValidation.jsx'
 import NotFound from './components/NotFound.jsx'
@@ -144,6 +145,8 @@ function App() {
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<DirectoryView />} />
+                <Route path="/register" element={<RegisterView/>} />
+                
                 <Route path="/register-project" element={<ProjectSubmissionWizard/>} />
                 <Route path="/evaluator-dashboard/project/:id" element={<DashboardLayout><EvaluationRoom /></DashboardLayout>} />
                 <Route path="/login" element={<LoginView />} />

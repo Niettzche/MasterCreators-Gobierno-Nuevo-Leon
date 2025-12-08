@@ -1,0 +1,87 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{helvet}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+% Colores Institucionales
+\definecolor{navyblue}{RGB}{0, 51, 102}
+\definecolor{accentorange}{RGB}{255, 107, 0}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+
+% Configuración de encabezado
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textcolor{gray}{Funcionalidad de Páginas}}
+\lhead{\textcolor{navyblue}{\textbf{Plataforma Integral de Clústeres NL}}}
+\rfoot{Página \thepage}
+
+\begin{document}
+
+\section*{Documentación Funcional de Páginas Clave}
+Este documento describe de manera sencilla y directa para qué sirve cada una de las páginas principales (dashboards) de la plataforma, pensando en los usuarios y sus roles.
+
+\subsection{1. Página Principal del Clúster (para el Solicitante)}
+\textbf{Rol:} El Representante Legal o equipo administrativo del Clúster.
+
+Esta es la página principal que ve un Clúster cuando entra al sistema. Desde aquí, pueden manejar todo lo relacionado con su perfil y con los apoyos que solicitan. Es su centro de operaciones personal.
+\begin{itemize}
+    \item \textbf{Arriba de todo:} Verás el nombre de tu Clúster y si está 'Activo' o no. Es un vistazo rápido a tu estado en la plataforma.
+    \item \textbf{Sección 'Directorio':} Aquí puedes ver qué tan completo está el perfil de tu Clúster. También te dice cuántas empresas asociadas a tu Clúster están registradas. Si necesitas verlas o cambiar algo de tu información, tienes botones directos para 'Ver Empresas' o 'Actualizar Perfil'.
+    \item \textbf{Sección 'Ventanilla Digital':} Esta es la parte donde controlas los apoyos. Verás un resumen de cuántas solicitudes tienes 'en proceso', cuántas ya hiciste ('historial') y cuánto dinero se te ha 'aprobado'. Si quieres pedir un nuevo apoyo para un proyecto, hay un botón grande que dice 'Nueva Solicitud de Apoyo' para empezar el proceso.
+    \item \textbf{Abajo, la 'Tabla de Proyectos Recientes':} Hay una lista con tus proyectos más nuevos. Puedes ver su número (folio), cómo se llama el proyecto, el programa de apoyo al que pertenece, cuánto dinero pediste y en qué 'estatus' está (si es un 'borrador', si lo están 'revisando', o si ya fue 'aprobado').
+\end{itemize}
+
+\subsection{2. Página de Gobierno (para el Súper Administrador)}
+\textbf{Rol:} La Dirección de Clústeres o el equipo de administradores del Gobierno.
+
+Esta página es para la gente del Gobierno que maneja todo el programa. Es como su 'centro de control' para ver cómo van las cosas en general y qué necesita su atención urgente.
+\begin{itemize}
+    \item \textbf{Al principio, los 'Números Clave':} Hay unos recuadros con información muy importante, como:
+    \begin{itemize}
+        \item \textbf{'Por Validar':} Te dice cuántas solicitudes o trámites están pendientes de revisar por el equipo del Gobierno, y cuáles son más urgentes.
+        \item \textbf{'Convocatorias Activas':} Cuántos programas de apoyo están abiertos en este momento y cuándo es su fecha de cierre.
+        \item \textbf{'Presupuesto Global':} Cuánto dinero total tiene el Gobierno para este año y cuánto ya se ha comprometido o usado.
+        \item \textbf{'Clústeres Registrados':} Un contador que muestra cuántos Clústeres ya están inscritos de los 15 que se tienen como meta.
+    \end{itemize}
+    \item \textbf{La 'Actividad Reciente' (como una bandeja de entrada):} Más abajo, hay como una sección de 'notificaciones' con todo lo que ha pasado recientemente en la plataforma: si un Clúster mandó una nueva solicitud, si subió sus reportes mensuales, o si alguien nuevo se registró. Y si hay que hacer algo, como 'Revisar Documentos', hay un botón rápido.
+    \item \textbf{'Estado de Convocatorias':} Aquí puedes ver cómo va cada programa de apoyo. Hay unas barras que te muestran cuántas solicitudes se han recibido comparado con las que se esperaban. También hay un botón grande para 'Crear Nueva Convocatoria' si necesitas lanzar un nuevo programa de apoyo.
+\end{itemize}
+
+\subsection{3. Página del Evaluador (para el Comité Técnico)}
+\textbf{Rol:} Los expertos del Comité de Evaluación Técnica.
+
+Si eres parte del Comité Evaluador, esta es tu página. Aquí verás solamente los proyectos que te tocaron revisar a ti. Es una página muy enfocada para que hagas tu trabajo de evaluación sin distracciones.
+\begin{itemize}
+    \item \textbf{La 'Tabla de Expedientes Asignados':} En esta tabla, aparecerán los nombres de los proyectos, a qué Clúster pertenecen, cuándo los mandaron para revisión y, muy importante, cuándo es tu 'fecha límite' para revisarlos. ¡Ojo! Las fechas límite que están por vencer se ponen en rojo para que no se te pasen.
+    \item \textbf{El botón 'Evaluar':} Cuando estés listo para revisar un proyecto, dale clic a este botón y te llevará a la sección donde puedes poner tu calificación y tus comentarios técnicos. También hay un enlace a la 'Guía de Evaluación' si necesitas consultarla.
+\end{itemize}
+
+\subsection{4. Página de Finanzas (para el Equipo de Tesorería)}
+\textbf{Rol:} El personal de la Secretaría de Finanzas o de Pagos del Gobierno.
+
+Esta página es para el equipo de Finanzas del Gobierno. Desde aquí controlan los pagos que se hacen a los Clústeres y se aseguran de que todo el dinero se maneje correctamente, validando requisitos fiscales y bancarios.
+\begin{itemize}
+    \item \textbf{'Pagos Pendientes':} Un recuadro importante que te dice cuánto dinero en total hay que pagar a Clústeres en proyectos ya aprobados.
+    \item \textbf{'Validación Bancaria':} Hay un apartado donde ven las cuentas bancarias de los Clústeres que se acaban de registrar. Es crucial que alguien de Finanzas 'valide' que la información de la carátula bancaria sea correcta antes de poder hacerles cualquier pago.
+    \item \textbf{'Presupuesto Disponible':} Un indicador rápido de cuánto dinero total tiene el Gobierno disponible para estos programas de apoyo.
+    \item \textbf{La 'Lista de Solicitudes de Dispersión':} Aquí tienen una lista de todos los proyectos que ya se 'aprobaron' y están listos para que se les haga un pago (una 'dispersión' de dinero). Pueden ver el proyecto, a qué Clúster le toca, cuándo se aprobó y por cuánto dinero. Cuando ya se hizo el pago, hay un botón para 'Registrar Pago' y así el sistema lo guarda como hecho y notifica al Clúster.
+\end{itemize}
+
+\subsection{5. Página de Auditoría (para Contraloría o Auditores)}
+\textbf{Rol:} El Órgano Interno de Control o los Auditores externos.
+
+Para la gente de Auditoría o Contraloría, esta página es su herramienta principal para revisar los proyectos una vez que ya terminaron y se cerraron, para asegurarse de que todo esté en orden y se hayan cumplido las reglas.
+\begin{itemize}
+    \item \textbf{'Expedientes Cerrados':} Un recuadro que indica cuántos proyectos ya se cerraron y están listos para ser auditados.
+    \item \textbf{'Observaciones Abiertas':} Un contador que les dice cuántas 'observaciones' o 'problemas' de auditoría siguen abiertas o son importantes de atender.
+    \item \textbf{'Buscador de Expedientes':} Si buscan un proyecto en específico, pueden usar este buscador por su número de folio, el RFC del Clúster o palabras clave relacionadas.
+    \item \textbf{La 'Tabla de Proyectos Auditables':} Verán una tabla con todos los proyectos que ya 'cerraron'. Algunos proyectos pueden aparecer con un 'Nivel de Riesgo' (alto, medio o bajo), lo que les ayuda a decidir cuáles revisar con más cuidado. Hay un botón 'Auditar' que les permite entrar al detalle de un proyecto cerrado para empezar la revisión.
+\end{itemize}
+
+\end{document}

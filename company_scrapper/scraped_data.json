@@ -1,0 +1,231 @@
+{
+  "Cluster Automotriz": [
+    {
+      "company": "Caterpillar",
+      "url": "https://www.caterpillar.com/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "company": "Daimler",
+      "url": "https://www.daimlertruck.com/",
+      "title": "Home | Daimler Truck",
+      "description": "We are one of the world's largest commercial vehicle manufacturers, with over 40 production sites around the globe and more than 100,000 employees."
+    },
+    {
+      "company": "Nemak",
+      "url": "https://www.nemak.com/",
+      "title": "Nemak",
+      "description": ""
+    }
+  ],
+  "Cluster Agroalimentario": [
+    {
+      "company": "Heineken",
+      "url": "https://www.heinekenmexico.com/",
+      "title": "HEINEKEN México - Home",
+      "description": "Descubre nuestra historia, productos y más"
+    },
+    {
+      "company": "HEB",
+      "url": "https://www.heb.com.mx/",
+      "title": "H-E-B México | Lo mejor para ti",
+      "description": "Supermercado con artículos de farmacia, electrónica, higiene, hogar, ropa, cocina y carnes. Servicio a domicilio de la mejor calidad o recoge en tienda."
+    },
+    {
+      "company": "Sigma Alimentos",
+      "url": "https://www.sigma-alimentos.com/",
+      "title": "Sigma Alimentos | Somos una compañía global dedicada a ofrecer los alimentos favoritos de las comunidades. Con presencia en 18 países, ofrecemos productos de calidad en diversas categorías y precios.",
+      "description": ""
+    }
+  ],
+  "Cluster Biotecnología": [
+    {
+      "company": "CINVESTAV Monterrey",
+      "url": "https://www.cinvestav.mx/",
+      "title": "Centro de Investigación y de Estudios Avanzados del Instituto Politécnico Nacional",
+      "description": ""
+    },
+    {
+      "company": "Novogen",
+      "url": "https://www.novogen-group.com/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "company": "UANL",
+      "url": "https://www.uanl.mx/",
+      "title": "Inicio - Universidad Autónoma de Nuevo León",
+      "description": "La UANL es la universidad pública más grande del norte de México, con más de 400 programas educativos en niveles medio superior y superior."
+    }
+  ],
+  "Cluster Aeroespacial": [
+    {
+      "company": "Terma",
+      "url": "https://www.terma.com/",
+      "title": "TERMA | Allies in innovation",
+      "description": "Since 1949 Terma continues to deliver advanced technologies that are designed for mission-critical environments where lives and assets are at stake."
+    },
+    {
+      "company": "Frisa Aerospace",
+      "url": "https://www.frisa.com/",
+      "title": "FRISA",
+      "description": "FRISA is a global leading manufacturer of seamless rolled rings & open die forgings with a wide spectrum of industrial markets. Request a quote today!"
+    },
+    {
+      "company": "Ducommun",
+      "url": "https://www.ducommun.com/",
+      "title": "Electronics and Aerostructures | Ducommun",
+      "description": "Discover Ducommun. Innovative tier 2 supplier of electronics and structural systems for commercial aerospace, military, space, and industrial programs."
+    }
+  ],
+  "Cluster de Electrodomésticos": [
+    {
+      "company": "Whirlpool",
+      "url": "https://www.whirlpoolcorp.com/",
+      "title": "Whirlpool Corporation | In Constant Pursuit of Improving Life at Home",
+      "description": "Whirlpool Corporation, in constant pursuit of improving life at home. Follow our journey with The Washing Machine Project Learn more Company, Brand and Product News Half the Global Population Washes Clothes by Hand: Whirlpool Foundation, The Washing Machine Project..."
+    },
+    {
+      "company": "Carrier",
+      "url": "https://www.carrier.com/",
+      "title": "For The World We Share | Carrier",
+      "description": "Carrier is a global leader in intelligent climate and energy solutions"
+    },
+    {
+      "company": "Danfoss",
+      "url": "https://www.danfoss.com/",
+      "title": "We engineer a better future | Danfoss",
+      "description": "We engineer solutions that increase machine productivity, reduce emissions, lower energy consumption, and enable electrification. We are a family-owned company dedicated to creating long-term value for all our stakeholders."
+    }
+  ],
+  "Cluster TIC": [
+    {
+      "company": "Softtek",
+      "url": "https://www.softtek.com/",
+      "title": "Softtek",
+      "description": "Global leader in next-gen digital solutions and the first to introduce the nearshore model, helping Global 2000 organizations build digital capabilities."
+    },
+    {
+      "company": "Neoris",
+      "url": "https://www.neoris.com/",
+      "title": "EPAM NEORIS | Digital Business Transformation Accelerator",
+      "description": "We harness the power of emerging technologies and digital solutions to enable companies to disrupt their industries"
+    },
+    {
+      "company": "Sony",
+      "url": "https://www.sony.com/",
+      "title": "",
+      "description": ""
+    }
+  ],
+  "Cluster Energético": [
+    {
+      "company": "Cemex",
+      "url": "https://www.cemex.com/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "company": "Ternium",
+      "url": "https://www.ternium.com/",
+      "title": "Proveedor y fabricante de acero en las Américas | Ternium",
+      "description": "Descubre Ternium, fabricante de acero líder en las Américas. Visita nuestra web para obtener información sobre nuestros productos, servicios y más."
+    },
+    {
+      "company": "Schneider Electric",
+      "url": "https://www.se.com/",
+      "title": "Schneider Electric Global | Your Energy Technology Partner",
+      "description": "As a global specialist in energy management, automation and digitalization in more than 100 countries, we offer integrated energy technology solutions across multiple market segments."
+    }
+  ],
+  "MIMEC (Medios Creativos)": [
+    {
+      "company": "Fósforo Cinema",
+      "url": "https://fosforo.tv/",
+      "title": "fosforo",
+      "description": "Brand documentary, Publicidad creativa, Art Films"
+    },
+    {
+      "company": "Imagyx",
+      "url": "https://www.imagyx.com/",
+      "title": "IMAGYX Entertainment ⎟Original content for film, television and digital",
+      "description": "Producción de cine y video para medios digitales y branded content. Nos especializamos en contar historias, Historias Extraordinarias."
+    },
+    {
+      "company": "I2T2",
+      "url": "https://www.i2t2.gob.mx/",
+      "title": "I2T2",
+      "description": ""
+    }
+  ],
+  "Cluster de Nanotecnología": [
+    {
+      "company": "Cemex",
+      "url": "https://www.cemex.com/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "company": "Nemak",
+      "url": "https://www.nemak.com/",
+      "title": "Nemak",
+      "description": ""
+    },
+    {
+      "company": "Vitro",
+      "url": "https://www.vitro.com/",
+      "title": "Vitro – Makers of a Bright Future",
+      "description": "Makers of a Bright Future Dedicating efforts and joining all types of clients in diverse industries. Learn more Recent news View more Architectural Glass Archit"
+    }
+  ],
+  "Cluster de Servicios Médicos": [
+    {
+      "company": "Hospital Muguerza",
+      "url": "https://www.christusmuguerza.com/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "company": "Thermo Fisher Scientific",
+      "url": "https://www.thermofisher.com/",
+      "title": "Thermo Fisher Scientific - MX",
+      "description": "Thermo Fisher Scientific enables our customers to make the world healthier, cleaner and safer. Delivering technology, pharmaceutical and biotechnology services."
+    },
+    {
+      "company": "Baxter México",
+      "url": "https://www.baxter.mx/",
+      "title": "Unidos para Salvar y Sostener Vidas | Baxter",
+      "description": ""
+    }
+  ],
+  "Cluster de Turismo": [
+    {
+      "company": "Ibo Adventures",
+      "url": "https://www.iboaventura.com/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "company": "Óptima Hoteles",
+      "url": "https://www.optimahoteles.com/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "company": "Monterrey Convention and Visitors Bureau (OCV)",
+      "url": "https://www.ocvmty.com/",
+      "title": "",
+      "description": ""
+    }
+  ],
+  "Cluster de Herramentales": [
+    {
+      "company": "FAMA",
+      "url": "",
+      "title": "",
+      "description": ""
+    }
+  ],
+  "Cluster Vivienda": []
+}
