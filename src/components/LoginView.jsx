@@ -21,7 +21,7 @@ export default function LoginView() {
     { email: 'gobierno@test.com', password: 'password', role: 'gobierno' },
     { email: 'cluster@test.com', password: 'password', role: 'cluster' },
     { email: 'evaluator@test.com', password: 'password', role: 'evaluator' },
-    { email: 'comite@test.com', password: 'password', role: 'comite' },
+    { email: 'comite@test.com', password: 'password', role: 'comite' }, //comite es lo mismo que evaludor 
     { email: 'finanzas@test.com', password: 'password', role: 'finanzas' },
     { email: 'auditor@test.com', password: 'password', role: 'auditor' },
   ];

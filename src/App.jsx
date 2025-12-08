@@ -2,13 +2,21 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import DirectoryView from './components/DirectoryView';
-import RegisterView from './components/RegisterView';
 import LoginView from './components/LoginView';
 import ClusterDashboard from './components/ClusterDashboard.jsx'
 import SuperAdminDashboard from './components/SuperAdminDashboard.jsx'
 import EvaluatorDashboard from './components/EvaluatorDashboard.jsx'
 import FinanceDashboard from './components/FinanceDashboard.jsx'
 import AuditDashboard from './components/AuditDashboard.jsx'
+import ProjectSubmissionWizard from './components/ProjectSubmissionWizard.jsx'
+import ClusterProjects from './components/ClusterProjects.jsx'
+import DigitalVault from './components/DigitalVault.jsx'
+import ClusterFinances from './components/ClusterFinances.jsx'
+import ClusterProfile from './components/ClusterProfile.jsx'
+import AuditFindings from './components/AuditFindings.jsx'
+import EvaluationRoom from './components/EvaluationRoom.jsx'
+import BankAccountValidation from './components/BankAccountValidation.jsx'
+import NotFound from './components/NotFound.jsx'
 import DashboardLayout from './components/DashboardLayout.jsx'
 import { AnimatePresence, motion } from 'framer-motion';
 import gobiernoLogo from './assets/gobierno.svg';
@@ -136,14 +144,21 @@ function App() {
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<DirectoryView />} />
-                <Route path="/register" element={<RegisterView />} />
+                <Route path="/register-project" element={<ProjectSubmissionWizard/>} />
+                <Route path="/evaluator-dashboard/project/:id" element={<DashboardLayout><EvaluationRoom /></DashboardLayout>} />
                 <Route path="/login" element={<LoginView />} />
                 <Route path="/cluster-dashboard" element={<DashboardLayout><ClusterDashboard /></DashboardLayout>} />
-                <Route path="/dashboard/*" element={<DashboardLayout><ClusterDashboard /></DashboardLayout>} />
+                <Route path="/cluster-dashboard/proyectos" element={<DashboardLayout><ClusterProjects /></DashboardLayout>} />
+                <Route path="/cluster-dashboard/evidencias" element={<DashboardLayout><DigitalVault /></DashboardLayout>} />
+                <Route path="/cluster-dashboard/finanzas" element={<DashboardLayout><ClusterFinances /></DashboardLayout>} />
+                <Route path="/cluster-dashboard/perfil" element={<DashboardLayout><ClusterProfile /></DashboardLayout>} />
                 <Route path="/admin-dashboard/*" element={<DashboardLayout><SuperAdminDashboard /></DashboardLayout>} />
                 <Route path="/evaluator-dashboard/*" element={<DashboardLayout><EvaluatorDashboard /></DashboardLayout>} />
                 <Route path="/finance-dashboard/*" element={<DashboardLayout><FinanceDashboard /></DashboardLayout>} />
-                <Route path="/audit-dashboard/*" element={<DashboardLayout><AuditDashboard /></DashboardLayout>} />
+                <Route path="/audit-dashboard" element={<DashboardLayout><AuditDashboard /></DashboardLayout>} />
+                <Route path="/audit-dashboard/reports" element={<DashboardLayout><AuditFindings /></DashboardLayout>} />
+                <Route path="/evaluator-dashboard/project/:id" element={<DashboardLayout><EvaluationRoom /></DashboardLayout>} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </AnimatePresence>
           </main>
