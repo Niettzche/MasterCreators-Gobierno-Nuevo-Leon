@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import mitcLogo from '../assets/MITC.svg';
+import mitcLogo from '../../assets/MITC.svg';
 
 // =========================================================
 // COMPONENTE: RegisterView

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import gobiernoLogo from '../assets/gobierno.svg';
+import gobiernoLogo from '../../assets/gobierno.svg';
 
 export default function Navbar() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import gobiernoLogo from '../assets/gobierno.svg';
+import gobiernoLogo from '../../assets/gobierno.svg';
 
 // =========================================================
 // COMPONENTE: NotFound (404 Page)

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import gobiernoLogo from '../assets/gobierno.svg'; 
+import gobiernoLogo from '../../assets/gobierno.svg'; 
 
 // =========================================================
 // COMPONENTE: LoginView

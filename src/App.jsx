@@ -1,24 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import DirectoryView from './components/DirectoryView';
-import LoginView from './components/LoginView';
-import ClusterDashboard from './components/ClusterDashboard.jsx'
-import SuperAdminDashboard from './components/SuperAdminDashboard.jsx'
-import EvaluatorDashboard from './components/EvaluatorDashboard.jsx'
-import FinanceDashboard from './components/FinanceDashboard.jsx'
-import AuditDashboard from './components/AuditDashboard.jsx'
-import ProjectSubmissionWizard from './components/ProjectSubmissionWizard.jsx'
-import ClusterProjects from './components/ClusterProjects.jsx'
-import DigitalVault from './components/DigitalVault.jsx'
-import ClusterFinances from './components/ClusterFinances.jsx'
-import ClusterProfile from './components/ClusterProfile.jsx'
-import AuditFindings from './components/AuditFindings.jsx'
-import RegisterView from './components/RegisterView.jsx'
-import EvaluationRoom from './components/EvaluationRoom.jsx'
-import BankAccountValidation from './components/BankAccountValidation.jsx'
-import NotFound from './components/NotFound.jsx'
-import DashboardLayout from './components/DashboardLayout.jsx'
+import Navbar from './components/Layout/Navbar';
+import DirectoryView from './components/Public/DirectoryView';
+import LoginView from './components/Auth/LoginView';
+import ClusterDashboard from './components/ClusterDashboard/index.jsx'
+import SuperAdminDashboard from './components/AdminDashboard/index.jsx'
+import EvaluatorDashboard from './components/EvaluatorDashboard/index.jsx'
+import FinanceDashboard from './components/FinanceDashboard/index.jsx'
+import AuditDashboard from './components/AuditDashboard/index.jsx'
+import ProjectSubmissionWizard from './components/ProjectSubmission/ProjectSubmissionWizard.jsx'
+import ClusterProjects from './components/ClusterDashboard/ClusterProjects.jsx'
+import DigitalVault from './components/ClusterDashboard/DigitalVault.jsx'
+import ClusterFinances from './components/ClusterDashboard/ClusterFinances.jsx'
+import ClusterProfile from './components/ClusterDashboard/ClusterProfile.jsx'
+import AuditFindings from './components/AuditDashboard/AuditFindings.jsx'
+import RegisterView from './components/Auth/RegisterView.jsx'
+import EvaluationRoom from './components/EvaluatorDashboard/EvaluationRoom.jsx'
+import BankAccountValidation from './components/FinanceDashboard/BankAccountValidation.jsx'
+import NotFound from './components/Public/NotFound.jsx'
+import DashboardLayout from './components/Layout/DashboardLayout.jsx'
 import { AnimatePresence, motion } from 'framer-motion';
 import gobiernoLogo from './assets/gobierno.svg';
 

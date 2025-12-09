@@ -2,19 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import clautLogo from '../assets/logos/claut.jpg';
-import csoftmtyLogo from '../assets/logos/csoftmty.jpg';
-import clelacLogo from '../assets/logos/clelac.jpg';
-import aeroclusterLogo from '../assets/logos/aerocluster.jpg';
-import agroalimLogo from '../assets/logos/agroalim.jpg';
-import energeticoLogo from '../assets/logos/energetico.jpg';
-import saludLogo from '../assets/logos/salud.jpg';
-import viviendaLogo from '../assets/logos/vivienda.jpg';
-import bioclusterLogo from '../assets/logos/biocluster.jpg';
-import nanoLogo from '../assets/logos/nano.jpg';
-import mimecLogo from '../assets/logos/mimec.jpg';
-import herramentalesLogo from '../assets/logos/herramentales.jpg';
-import turismoLogo from '../assets/logos/turismo.jpg';
+import clautLogo from '../../assets/logos/claut.jpg';
+import csoftmtyLogo from '../../assets/logos/csoftmty.jpg';
+import clelacLogo from '../../assets/logos/clelac.jpg';
+import aeroclusterLogo from '../../assets/logos/aerocluster.jpg';
+import agroalimLogo from '../../assets/logos/agroalim.jpg';
+import energeticoLogo from '../../assets/logos/energetico.jpg';
+import saludLogo from '../../assets/logos/salud.jpg';
+import viviendaLogo from '../../assets/logos/vivienda.jpg';
+import bioclusterLogo from '../../assets/logos/biocluster.jpg';
+import nanoLogo from '../../assets/logos/nano.jpg';
+import mimecLogo from '../../assets/logos/mimec.jpg';
+import herramentalesLogo from '../../assets/logos/herramentales.jpg';
+import turismoLogo from '../../assets/logos/turismo.jpg';
 
 // =========================================================
 // COMPONENTE: DirectoryView
