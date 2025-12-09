@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import gobiernoLogo from '../../assets/gobierno.svg';
 
 // =========================================================
 // COMPONENTE: ProjectSubmissionWizard
@@ -8,6 +9,111 @@ import { useNavigate } from 'react-router-dom';
 // Formulario guiado (Wizard) para la postulación de proyectos.
 // Cubre Secciones A-F del documento de requerimientos.
 // =========================================================
+
+function SubmissionSuccessAnimation({ onComplete }) {
+  const text = "SOLICITUD ENVIADA";
+  const words = text.split(" ");
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+        onComplete();
+    }, 3500);
+    return () => clearTimeout(timer);
+  }, [onComplete]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background-alternate overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Dynamic Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        <motion.div 
+          className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_50%,#FF6B0040,transparent)]"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      {/* Decorative Orbs */}
+      <motion.div
+        className="absolute w-[600px] h-[600px] border border-primary/20 rounded-full"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        className="absolute w-[500px] h-[500px] border border-secondary/10 rounded-full"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Main Logo Container */}
+      <div className="relative z-10 flex flex-col items-center">
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ 
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+            duration: 1.5
+          }}
+          className="relative mb-8"
+        >
+          {/* Logo Glow Effect */}
+          <motion.div 
+            className="absolute inset-0 bg-primary/30 blur-3xl rounded-full"
+            animate={{ scale: [0.8, 1.2, 0.8] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <img src={gobiernoLogo} alt="Gobierno Nuevo León" className="w-32 h-32 md:w-48 md:h-48 object-contain relative z-10 drop-shadow-2xl" />
+        </motion.div>
+
+        {/* Staggered Text Animation */}
+        <div className="overflow-hidden flex gap-3 text-3xl md:text-5xl font-black tracking-tighter text-text-main uppercase">
+          {words.map((word, i) => (
+            <motion.span
+              key={i}
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                delay: 0.5 + (i * 0.1),
+                duration: 0.8,
+                ease: [0.2, 0.65, 0.3, 0.9],
+              }}
+              className="text-primary"
+            >
+              {word}
+            </motion.span>
+          ))}
+        </div>
+        
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5 }}
+            className="mt-6 flex items-center gap-2 text-emerald-600 font-bold bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100 shadow-sm"
+        >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
+            <span>Registro Exitoso</span>
+        </motion.div>
+
+        <motion.p
+          className="mt-4 text-sm font-medium text-text-body tracking-[0.3em] uppercase"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
+        >
+          Redirigiendo al panel...
+        </motion.p>
+      </div>
+    </motion.div>
+  );
+}
 
 const STEPS = [
   { id: 1, title: 'Datos Generales', icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0c0 .884-.95 2-2 2a2 2 0 100 4 2 2 0 012-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg> },
@@ -19,6 +125,7 @@ const STEPS = [
 export default function ProjectSubmissionWizard() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     // Paso 1
     projectName: '',
@@ -44,6 +151,12 @@ export default function ProjectSubmissionWizard() {
 
   return (
     <div className="-m-8 min-h-full bg-slate-50/50">
+      <AnimatePresence>
+        {isSubmitted && (
+            <SubmissionSuccessAnimation onComplete={() => navigate('/cluster-dashboard/proyectos')} />
+        )}
+      </AnimatePresence>
+
       {/* Header del Wizard */}
       <div className="bg-white border-b border-slate-200 px-8 py-6 sticky top-0 z-10 shadow-sm">
         <div className="max-w-5xl mx-auto">
@@ -261,7 +374,7 @@ export default function ProjectSubmissionWizard() {
                 </button>
             ) : (
                 <button 
-                    onClick={() => console.log('Enviando...')}
+                    onClick={() => setIsSubmitted(true)}
                     className="px-8 py-3 bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-xl font-bold hover:shadow-orange-500/30 shadow-lg transition-all flex items-center gap-2"
                 >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>

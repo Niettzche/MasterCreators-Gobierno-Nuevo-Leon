@@ -111,7 +111,10 @@ export default function SuperAdminDashboard() {
         >
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-bold text-slate-800">Actividad Reciente</h2>
-            <button className="text-sm text-orange-600 font-semibold hover:text-orange-700 flex items-center gap-1">
+            <button 
+              onClick={() => navigate('/admin-dashboard/inbox')}
+              className="text-sm text-orange-600 font-semibold hover:text-orange-700 flex items-center gap-1"
+            >
               Ver bandeja completa <span>&rarr;</span>
             </button>
           </div>
@@ -127,7 +130,10 @@ export default function SuperAdminDashboard() {
                 </div>
                 <p className="text-sm text-slate-600 mt-1">El <span className="font-semibold">Clúster Automotriz</span> ha enviado una nueva solicitud para la Convocatoria 2025-A.</p>
                 <div className="mt-3 flex gap-2">
-                   <button className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:text-orange-600 hover:border-orange-200 transition-colors">
+                   <button 
+                     onClick={() => navigate('/admin-dashboard/inbox')}
+                     className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:text-orange-600 hover:border-orange-200 transition-colors"
+                   >
                      Revisar Documentos
                    </button>
                 </div>
@@ -202,7 +208,10 @@ export default function SuperAdminDashboard() {
           </div>
           
           <div className="mt-auto pt-6">
-            <button className="w-full py-2.5 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-slate-700 transition-colors shadow-lg shadow-slate-200 flex items-center justify-center gap-2">
+            <button 
+              onClick={() => navigate('/admin-dashboard/convocatorias')}
+              className="w-full py-2.5 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-slate-700 transition-colors shadow-lg shadow-slate-200 flex items-center justify-center gap-2"
+            >
                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"/></svg>
                Nueva Convocatoria
             </button>

@@ -22,6 +22,12 @@ import DashboardLayout from './components/Layout/DashboardLayout.jsx'
 import { AnimatePresence, motion } from 'framer-motion';
 import gobiernoLogo from './assets/gobierno.svg';
 
+import AdminInbox from './components/AdminDashboard/Inbox.jsx'
+import AdminClusters from './components/AdminDashboard/Clusters.jsx'
+import AdminConvocatorias from './components/AdminDashboard/Convocatorias.jsx'
+import AdminReports from './components/AdminDashboard/Reports.jsx'
+import AdminDocuments from './components/AdminDashboard/Documents.jsx'
+
 function InitialAnimation({ onComplete }) {
   const text = "NUEVO LEÓN";
   const words = text.split(" ");
@@ -146,8 +152,7 @@ function App() {
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<DirectoryView />} />
                 <Route path="/register" element={<RegisterView/>} />
-                
-                <Route path="/register-project" element={<ProjectSubmissionWizard/>} />
+                <Route path="/register-project" element={<DashboardLayout><ProjectSubmissionWizard/> </DashboardLayout>} />
                 <Route path="/evaluator-dashboard/project/:id" element={<DashboardLayout><EvaluationRoom /></DashboardLayout>} />
                 <Route path="/login" element={<LoginView />} />
                 <Route path="/cluster-dashboard" element={<DashboardLayout><ClusterDashboard /></DashboardLayout>} />
@@ -155,7 +160,12 @@ function App() {
                 <Route path="/cluster-dashboard/evidencias" element={<DashboardLayout><DigitalVault /></DashboardLayout>} />
                 <Route path="/cluster-dashboard/finanzas" element={<DashboardLayout><ClusterFinances /></DashboardLayout>} />
                 <Route path="/cluster-dashboard/perfil" element={<DashboardLayout><ClusterProfile /></DashboardLayout>} />
-                <Route path="/admin-dashboard/*" element={<DashboardLayout><SuperAdminDashboard /></DashboardLayout>} />
+                <Route path="/admin-dashboard" element={<DashboardLayout><SuperAdminDashboard /></DashboardLayout>} />
+                <Route path="/admin-dashboard/inbox" element={<DashboardLayout><AdminInbox /></DashboardLayout>} />
+                <Route path="/admin-dashboard/clusters" element={<DashboardLayout><AdminClusters /></DashboardLayout>} />
+                <Route path="/admin-dashboard/convocatorias" element={<DashboardLayout><AdminConvocatorias /></DashboardLayout>} />
+                <Route path="/admin-dashboard/reports" element={<DashboardLayout><AdminReports /></DashboardLayout>} />
+                <Route path="/admin-dashboard/documents" element={<DashboardLayout><AdminDocuments /></DashboardLayout>} />
                 <Route path="/evaluator-dashboard/*" element={<DashboardLayout><EvaluatorDashboard /></DashboardLayout>} />
                 <Route path="/finance-dashboard/*" element={<DashboardLayout><FinanceDashboard /></DashboardLayout>} />
                 <Route path="/audit-dashboard" element={<DashboardLayout><AuditDashboard /></DashboardLayout>} />

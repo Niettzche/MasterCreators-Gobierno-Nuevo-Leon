@@ -39,15 +39,15 @@ const MENU_CONFIG = {
         { to: "/cluster-dashboard/evidencias", label: "Bóveda Digital", icon: Icons.Boveda },
       ]
     },
-    {
-      title: "Administración",
-      key: "finanzas",
-      items: [
-        { to: "/cluster-dashboard/finanzas", label: "Finanzas y Pagos", icon: Icons.Finanzas },
-        { to: "/cluster-dashboard/perfil", label: "Perfil Institucional", icon: Icons.Perfil },
-      ]
-    }
-  ],
+            {
+              title: "Administración",
+              key: "finanzas",
+              items: [
+                { to: "/cluster-dashboard/finanzas", label: "Finanzas y Pagos", icon: Icons.Finanzas },
+                { to: "/cluster-dashboard/perfil?tab=profile", label: "Perfil Institucional", icon: Icons.Perfil },
+                { to: "/cluster-dashboard/perfil?tab=companies", label: "Empresas Asociadas", icon: Icons.Clusters },
+              ]
+            }  ],
   evaluator: [
     {
       title: "Evaluación de Proyectos",
@@ -82,8 +82,10 @@ const MENU_CONFIG = {
       title: "Supervisión",
       key: "gestion",
       items: [
+        { to: "/admin-dashboard", label: "Resumen General", icon: Icons.Resumen },
         { to: "/admin-dashboard/inbox", label: "Bandeja de Entrada", icon: Icons.Inbox },
         { to: "/admin-dashboard/clusters", label: "Padrón de Clústeres", icon: Icons.Clusters },
+        { to: "/admin-dashboard/documents", label: "Expedientes Globales", icon: Icons.Boveda },
       ]
     },
     {
@@ -137,24 +139,38 @@ export default function DashboardLayout({ children }) {
   };
 
   // --- LOGICA DE SELECCIÓN MEJORADA ---
-  const isActive = (path) => {
-    // Lista de rutas "raíz" que no deben activarse parcialmente
+  const isActive = (menuItemPath) => {
+    const url = new URL(`http://dummy.com${menuItemPath}`); // Use a dummy base for URL parsing
+    const menuPathname = url.pathname;
+    const menuSearch = url.search;
+
     const rootPaths = [
-      '/cluster-dashboard', 
-      '/admin-dashboard', 
-      '/evaluator-dashboard', 
-      '/finance-dashboard', 
+      '/cluster-dashboard',
+      '/admin-dashboard',
+      '/evaluator-dashboard',
+      '/finance-dashboard',
       '/audit-dashboard'
     ];
 
-    // Si es una ruta raíz, la coincidencia debe ser EXACTA
-    if (rootPaths.includes(path)) {
-      return location.pathname === path;
+    // For root paths, require exact match of pathname AND search query
+    if (rootPaths.includes(menuPathname)) {
+      return location.pathname === menuPathname && location.search === menuSearch;
     }
 
-    // Para subrutas (ej. /dashboard/proyectos), permitimos coincidencia parcial
-    // para que se mantenga activo si entras al detalle (/dashboard/proyectos/123)
-    return location.pathname === path || location.pathname.startsWith(path + '/');
+    // For other paths (sub-routes), allow startsWith for pathname, but exact match for search query if present
+    const pathnameMatches = location.pathname === menuPathname || location.pathname.startsWith(menuPathname + '/');
+
+    if (!pathnameMatches) {
+      return false;
+    }
+
+    // If the menu item has a query string, it must match exactly
+    if (menuSearch) {
+      return location.search === menuSearch;
+    }
+
+    // If the menu item has no query string, it's active if pathname matches and current location has no query
+    return location.search === '';
   };
 
   // --- SUB-COMPONENTES VISUALES ---
