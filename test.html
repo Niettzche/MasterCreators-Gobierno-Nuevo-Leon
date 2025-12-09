@@ -10,26 +10,19 @@
 <body>
     <h1>Página de prueba para HIVA WebChat</h1>
     <p>Si el widget de chat no aparece, revisa la consola de tu navegador (F12) para ver los errores de carga del script.</p>
+<!-- HIVA WebChat Widget -->
+<link rel="stylesheet" href="https://hivafilesdev.blob.core.windows.net/$web/webchat/v1/webchat-widget.css">
+<script src="https://hivafilesdev.blob.core.windows.net/$web/webchat/v1/hiva-webchat.umd.js"></script>
 
-    <!-- HIVA WebChat Widget JavaScript -->
-    <script src="https://hivafilesdev.blob.core.windows.net/$web/webchat/v1/hiva-webchat.umd.js"></script>
-
-    <script>
-        // Inicialización del widget
-        // Esta función 'hiva' estará disponible globalmente después de que el script anterior se cargue
-        if (typeof hiva !== 'undefined') {
-            console.log("HIVA: hiva() function found, attempting to initialize widget.");
-            hiva('init', {
-                integrationId: '5b3f1eae-80fd-4b83-add9-8ca797418fa0',
-                apiUrl: 'http://localhost:8000', // Asegúrate de que este apiUrl es correcto para tu backend
-                theme: {
-                    primaryColor: '#0066FF',
-                    position: 'bottom-right'
-                }
-            });
-        } else {
-            console.error("HIVA: hiva() function not found. The script 'hiva-webchat.umd.js' likely failed to load.");
-        }
-    </script>
+<script>
+  hiva('init', {
+    integrationId: '9d322a48-5916-47a3-b41b-fd71257bfff0',
+    apiUrl: 'https://hiva-dev-g8hwfcbqh9gbenfg.eastus2-01.azurewebsites.net',
+    theme: {
+      primaryColor: '#d6d6d6',
+      position: 'bottom-left'
+    }
+  });
+</script>
 </body>
 </html>
