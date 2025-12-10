@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import gobiernoLogo from '../../assets/gobierno.svg';
+import SupportChat from '../Support/SupportChat';
 
 // =========================================================
 // COMPONENTE: DashboardLayout
@@ -104,6 +105,7 @@ export default function DashboardLayout({ children }) {
   const location = useLocation();
   const [userRole, setUserRole] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [isChatOpen, setIsChatOpen] = useState(false);
   
   // Estado del acordeón
   const [openSections, setOpenSections] = useState({
@@ -256,7 +258,10 @@ export default function DashboardLayout({ children }) {
             <p className="text-[10px] text-slate-500">Línea directa</p>
           </div>
         </div>
-        <button className="w-full py-1.5 bg-orange-600 text-white text-xs font-bold rounded-lg hover:bg-orange-700 transition-colors">
+        <button 
+          onClick={() => setIsChatOpen(true)}
+          className="w-full py-1.5 bg-orange-600 text-white text-xs font-bold rounded-lg hover:bg-orange-700 transition-colors"
+        >
           Crear Ticket
         </button>
       </div>
@@ -270,7 +275,7 @@ export default function DashboardLayout({ children }) {
   };
 
   const currentMenu = getMenuForRole(userRole);
-  const showSupportCard = ['cluster', 'evaluator', 'finanzas', 'auditor'].includes(userRole);
+  const showSupportCard = true;
 
   return (
     <div className="flex h-screen bg-[#F3F4F6] overflow-hidden font-sans">
@@ -365,6 +370,7 @@ export default function DashboardLayout({ children }) {
           </motion.button>
         )}
       </main>
+      <SupportChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   );
 }

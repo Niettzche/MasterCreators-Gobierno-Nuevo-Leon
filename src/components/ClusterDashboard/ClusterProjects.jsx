@@ -117,11 +117,17 @@ export default function ClusterProjects() {
             </div>
 
             <div className="pl-2 mt-6 flex gap-2">
-              <button className="flex-1 bg-white border border-gray-200 text-text-body text-xs font-bold py-2 rounded-lg hover:bg-gray-50 transition-colors">
+              <button 
+                onClick={() => navigate('/cluster-dashboard/proyectos/' + project.id)}
+                className="flex-1 bg-white border border-gray-200 text-text-body text-xs font-bold py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              >
                 Ver Detalle
               </button>
               {project.status === 'Borrador' && (
-                <button className="flex-1 bg-primary/10 text-primary border border-primary/20 text-xs font-bold py-2 rounded-lg hover:bg-primary/20 transition-colors">
+                <button 
+                  onClick={() => navigate('/register-project?projectId=' + project.id)}
+                  className="flex-1 bg-primary/10 text-primary border border-primary/20 text-xs font-bold py-2 rounded-lg hover:bg-primary/20 transition-colors"
+                >
                   Continuar
                 </button>
               )}

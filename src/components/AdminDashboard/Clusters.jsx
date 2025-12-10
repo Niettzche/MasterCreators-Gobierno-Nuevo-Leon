@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 // --- MODAL COMPONENT FOR CLUSTERS ---
 const ClusterModal = ({ isOpen, onClose, onSave, initialData }) => {
@@ -166,6 +167,7 @@ const ClusterModal = ({ isOpen, onClose, onSave, initialData }) => {
 };
 
 export default function AdminClusters() {
+  const navigate = useNavigate();
   const [clusters, setClusters] = useState([
     { id: 1, name: "Clúster Automotriz de Nuevo León", acronym: "CLAUT", status: "active", members: 120, location: "Monterrey", contactName: "Roberto Martínez", contactEmail: "roberto@claut.mx" },
     { id: 2, name: "Clúster de Electrodomésticos", acronym: "CLELAC", status: "active", members: 85, location: "Apodaca", contactName: "Ana Silva", contactEmail: "ana@clelac.org" },
@@ -240,7 +242,8 @@ export default function AdminClusters() {
                   key={cluster.id} 
                   initial={{ opacity: 0 }} 
                   animate={{ opacity: 1 }}
-                  className="hover:bg-slate-50 transition-colors group"
+                  onClick={() => navigate(`/admin-dashboard/clusters/${cluster.id}`)}
+                  className="hover:bg-slate-50 transition-colors group cursor-pointer"
                 >
                   <td className="p-4">
                     <div className="font-bold text-slate-800">{cluster.name}</div>
@@ -256,14 +259,14 @@ export default function AdminClusters() {
                   <td className="p-4 text-center">
                     <div className="flex justify-center gap-2">
                         <button 
-                            onClick={() => openEditModal(cluster)}
+                            onClick={(e) => { e.stopPropagation(); openEditModal(cluster); }}
                             className="text-slate-400 hover:text-blue-600 p-2 rounded-lg hover:bg-blue-50 transition-colors"
                             title="Editar Información"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                         </button>
                         <button 
-                            onClick={() => handleDelete(cluster.id)}
+                            onClick={(e) => { e.stopPropagation(); handleDelete(cluster.id); }}
                             className="text-slate-400 hover:text-red-600 p-2 rounded-lg hover:bg-red-50 transition-colors"
                             title="Dar de Baja"
                         >

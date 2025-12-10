@@ -22,8 +22,11 @@ import DashboardLayout from './components/Layout/DashboardLayout.jsx'
 import { AnimatePresence, motion } from 'framer-motion';
 import gobiernoLogo from './assets/gobierno.svg';
 
+import ProjectDetail from './components/ClusterDashboard/ProjectDetail.jsx'
 import AdminInbox from './components/AdminDashboard/Inbox.jsx'
+import InboxDetail from './components/AdminDashboard/InboxDetail.jsx'
 import AdminClusters from './components/AdminDashboard/Clusters.jsx'
+import ClusterDetail from './components/AdminDashboard/ClusterDetail.jsx'
 import AdminConvocatorias from './components/AdminDashboard/Convocatorias.jsx'
 import AdminReports from './components/AdminDashboard/Reports.jsx'
 import AdminDocuments from './components/AdminDashboard/Documents.jsx'
@@ -157,12 +160,15 @@ function App() {
                 <Route path="/login" element={<LoginView />} />
                 <Route path="/cluster-dashboard" element={<DashboardLayout><ClusterDashboard /></DashboardLayout>} />
                 <Route path="/cluster-dashboard/proyectos" element={<DashboardLayout><ClusterProjects /></DashboardLayout>} />
+                <Route path="/cluster-dashboard/proyectos/:id" element={<DashboardLayout><ProjectDetail /></DashboardLayout>} />
                 <Route path="/cluster-dashboard/evidencias" element={<DashboardLayout><DigitalVault /></DashboardLayout>} />
                 <Route path="/cluster-dashboard/finanzas" element={<DashboardLayout><ClusterFinances /></DashboardLayout>} />
                 <Route path="/cluster-dashboard/perfil" element={<DashboardLayout><ClusterProfile /></DashboardLayout>} />
                 <Route path="/admin-dashboard" element={<DashboardLayout><SuperAdminDashboard /></DashboardLayout>} />
                 <Route path="/admin-dashboard/inbox" element={<DashboardLayout><AdminInbox /></DashboardLayout>} />
+                <Route path="/admin-dashboard/inbox/:id" element={<DashboardLayout><InboxDetail /></DashboardLayout>} />
                 <Route path="/admin-dashboard/clusters" element={<DashboardLayout><AdminClusters /></DashboardLayout>} />
+                <Route path="/admin-dashboard/clusters/:id" element={<DashboardLayout><ClusterDetail /></DashboardLayout>} />
                 <Route path="/admin-dashboard/convocatorias" element={<DashboardLayout><AdminConvocatorias /></DashboardLayout>} />
                 <Route path="/admin-dashboard/reports" element={<DashboardLayout><AdminReports /></DashboardLayout>} />
                 <Route path="/admin-dashboard/documents" element={<DashboardLayout><AdminDocuments /></DashboardLayout>} />

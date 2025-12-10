@@ -179,13 +179,12 @@ export default function ClusterDashboard() {
                 </div>
 
                 <div className="p-4 bg-gray-50 border-t border-gray-100 flex gap-3">
-                  <button 
-                    onClick={() => navigate('/cluster-dashboard/perfil')}
-                    className="flex-1 py-2.5 px-4 bg-white border border-primary/30 text-primary font-bold rounded-xl hover:bg-primary/10 transition-all text-sm shadow-sm"
-                  >
-                    Ver Empresas
-                  </button>
-                  <button 
+                                    <button
+                                      onClick={() => navigate('/cluster-dashboard/perfil?tab=companies')}
+                                      className="flex-1 py-2.5 px-4 bg-white border border-primary/30 text-primary font-bold rounded-xl hover:bg-primary/10 transition-all text-sm shadow-sm"
+                                    >
+                                      Ver Empresas
+                                    </button>                  <button 
                     onClick={() => navigate('/cluster-dashboard/perfil')}
                     className="flex-1 py-2.5 px-4 bg-primary text-white font-bold rounded-xl hover:bg-orange-600 shadow-lg shadow-primary/20 transition-all text-sm"
                   >

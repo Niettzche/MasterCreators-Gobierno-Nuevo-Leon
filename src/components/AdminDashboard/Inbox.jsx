@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminInbox() {
   const [filter, setFilter] = useState('pending');
-
+  const navigate = useNavigate();
+  
   const messages = [
     {
       id: 1,
@@ -37,7 +39,7 @@ export default function AdminInbox() {
   const filteredMessages = messages.filter(m => filter === 'pending' ? m.status === 'pending' : m.status === 'reviewed');
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-slate-800">Bandeja de Entrada</h1>
@@ -67,6 +69,7 @@ export default function AdminInbox() {
                 key={msg.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
+                onClick={() => navigate(`/admin-dashboard/inbox/${msg.id}`)}
                 className="p-6 hover:bg-slate-50 transition-colors flex items-start gap-4 cursor-pointer group"
               >
                 <div className={`mt-1 w-3 h-3 rounded-full flex-shrink-0 ${msg.priority === 'high' ? 'bg-red-500' : msg.priority === 'medium' ? 'bg-blue-500' : 'bg-slate-300'}`}></div>

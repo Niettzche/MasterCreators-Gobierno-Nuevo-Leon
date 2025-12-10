@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // =========================================================
 // COMPONENTE: ClusterFinances
@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 // =========================================================
 
 export default function ClusterFinances() {
+  const [showDetailedReport, setShowDetailedReport] = useState(false);
   
   // Mock Data
   const financialSummary = {
@@ -24,6 +25,85 @@ export default function ClusterFinances() {
     { id: 3, project: 'Capacitación IA', concept: 'Pago Único', date: '2024-11-20', amount: 625000, status: 'Pagado', ref: 'SPEI-92831' },
     { id: 4, project: 'Certificación Tier 2', concept: 'Ministración Final (Cierre)', date: '2025-02-15', amount: 625000, status: 'Pendiente', ref: '-' },
   ];
+
+  const detailedBreakdown = [
+    { category: 'Honorarios Profesionales', budget: 1000000, spent: 800000, remaining: 200000 },
+    { category: 'Equipamiento Tecnológico', budget: 800000, spent: 800000, remaining: 0 },
+    { category: 'Viáticos y Traslados', budget: 200000, spent: 50000, remaining: 150000 },
+    { category: 'Difusión y Eventos', budget: 300000, spent: 100000, remaining: 200000 },
+    { category: 'Gastos Administrativos', budget: 200000, spent: 125000, remaining: 75000 },
+  ];
+
+  if (showDetailedReport) {
+    return (
+      <div className="-m-8 p-8 min-h-full w-full font-sans text-text-body">
+        <header className="flex items-center gap-4 mb-8">
+          <button 
+            onClick={() => setShowDetailedReport(false)}
+            className="p-2 rounded-lg hover:bg-gray-100 text-slate-500 hover:text-orange-600 transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          <div>
+            <h1 className="text-3xl font-black text-text-main tracking-tight">Reporte Detallado</h1>
+            <p className="text-text-body text-sm mt-1 font-medium">Desglose presupuestal por rubro de gasto.</p>
+          </div>
+        </header>
+
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-8">
+           <div className="p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+              <h2 className="font-bold text-slate-800">Desglose por Partida Presupuestal</h2>
+              <button className="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
+                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                 Exportar Excel
+              </button>
+           </div>
+           <table className="w-full text-left text-sm">
+              <thead className="bg-white text-slate-500 font-bold uppercase tracking-wider text-xs border-b border-gray-100">
+                 <tr>
+                    <th className="px-6 py-4">Rubro / Categoría</th>
+                    <th className="px-6 py-4 text-right">Presupuesto Aprobado</th>
+                    <th className="px-6 py-4 text-right">Ejercido</th>
+                    <th className="px-6 py-4 text-right">Disponible</th>
+                    <th className="px-6 py-4 text-center">% Avance</th>
+                 </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                 {detailedBreakdown.map((item, idx) => (
+                    <tr key={idx} className="hover:bg-gray-50 transition-colors">
+                       <td className="px-6 py-4 font-bold text-slate-700">{item.category}</td>
+                       <td className="px-6 py-4 text-right font-mono text-slate-600">${item.budget.toLocaleString()}</td>
+                       <td className="px-6 py-4 text-right font-mono text-emerald-600 font-bold">${item.spent.toLocaleString()}</td>
+                       <td className="px-6 py-4 text-right font-mono text-slate-600">${item.remaining.toLocaleString()}</td>
+                       <td className="px-6 py-4 text-center">
+                          <div className="flex items-center gap-2 justify-center">
+                             <span className="text-xs font-bold text-slate-600 w-8 text-right">{Math.round((item.spent / item.budget) * 100)}%</span>
+                             <div className="w-20 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                <div 
+                                   className={`h-full rounded-full ${
+                                      (item.spent / item.budget) > 0.9 ? 'bg-red-500' : 
+                                      (item.spent / item.budget) > 0.5 ? 'bg-orange-500' : 'bg-emerald-500'
+                                   }`} 
+                                   style={{ width: `${(item.spent / item.budget) * 100}%` }}
+                                ></div>
+                             </div>
+                          </div>
+                       </td>
+                    </tr>
+                 ))}
+                 <tr className="bg-gray-50 font-bold text-slate-800">
+                    <td className="px-6 py-4">TOTAL</td>
+                    <td className="px-6 py-4 text-right">${detailedBreakdown.reduce((acc, i) => acc + i.budget, 0).toLocaleString()}</td>
+                    <td className="px-6 py-4 text-right text-emerald-700">${detailedBreakdown.reduce((acc, i) => acc + i.spent, 0).toLocaleString()}</td>
+                    <td className="px-6 py-4 text-right">${detailedBreakdown.reduce((acc, i) => acc + i.remaining, 0).toLocaleString()}</td>
+                    <td className="px-6 py-4"></td>
+                 </tr>
+              </tbody>
+           </table>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="-m-8 p-8 min-h-full w-full font-sans text-text-body">
@@ -148,7 +228,10 @@ export default function ClusterFinances() {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-gray-100">
-                    <button className="w-full py-2 bg-gray-50 text-text-body font-bold text-xs rounded-lg hover:bg-gray-100 transition-colors border border-gray-200">
+                    <button 
+                        onClick={() => setShowDetailedReport(true)}
+                        className="w-full py-2 bg-gray-50 text-text-body font-bold text-xs rounded-lg hover:bg-gray-100 transition-colors border border-gray-200"
+                    >
                         Ver Reporte Detallado
                     </button>
                 </div>

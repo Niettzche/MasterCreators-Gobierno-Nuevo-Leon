@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // =========================================================
 // COMPONENTE: ClusterProfile
@@ -14,6 +14,7 @@ import { useLocation } from 'react-router-dom';
 export default function ClusterProfile() {
   const [isEditing, setIsEditing] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const currentTab = queryParams.get('tab') || 'profile'; // Default to 'profile'
 
@@ -338,7 +339,10 @@ export default function ClusterProfile() {
                       <p className="text-xs text-text-body mb-3">
                           Para cambios en el Representante Legal, es necesario actualizar el Poder Notarial en la Bóveda Digital.
                       </p>
-                      <button className="w-full py-2 text-xs font-bold text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors">
+                      <button 
+                          onClick={() => navigate('/cluster-dashboard/evidencias')}
+                          className="w-full py-2 text-xs font-bold text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors"
+                      >
                           Ir a Bóveda Digital
                       </button>
                   </div>
